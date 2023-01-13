@@ -1,4 +1,4 @@
-Incidence and Prevalence of different cancers
+Incidence and Prevalence of different parkinsonism and its subtypes
 ========================================================================================================================================================
 
 ## Introduction
