@@ -1,16 +1,11 @@
-Incidence and Prevalence of different parkinsonism and its subtypes
+Incidence and Prevalence of Parkinsonism and its drug use
 ========================================================================================================================================================
 
 ## Introduction
-This study is focussing on determining the incidence and prevalence for specific cancers. We will focus on the following cancers:
-* Breast
-* Colorectal
-* Lung
-* Liver
-* Stomach
-* Head/neck
-* Prostate
-* Pancreas
+This study focuses on the incidence and prevalence of parkinsonism and its subtypes (namely Parkinson's Disease, vascular parkinsonism and drug-induced parkinsonism) as well as the incidence and prevalence of the use of popular antiparkinson drugs (namely levodopa, dopamine agonists, MAO-B inhibitors, COMT inhibitors and amantadine). More specifically, this study will be completed via these three onjectives:
+1) Calculate the annual incidence and period prevalence of parkinsonism and its subtypes from 2007 to now.
+2) Calculate the annual incidence and period prevalence of the use of each drug from 2007 to now.
+3) Calculate the annual incidence and period prevalence of ths use of each drug in each disease strata from 2007 to now.
 
 ## Running the analysis
 1) Download this entire repository (you can download as a zip folder using Code -> Download ZIP, or you can use GitHub Desktop). 
