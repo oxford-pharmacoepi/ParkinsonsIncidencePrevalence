@@ -1,15 +1,13 @@
-# Load packages ------
-
 # to install latest version of IncidencePrevalence
 #remotes::install_github("darwin-eu-dev/IncidencePrevalence",force = TRUE)
 
-# load r packages
 library(CirceR)
 library(IncidencePrevalence)
 library(here)
 library(DBI)
 library(dbplyr)
 library(dplyr)
+library(tidyr)
 library(readr)
 library(log4r)
 library(stringr)
@@ -18,8 +16,7 @@ library(ggplot2)
 
 # database metadata and connection details -----
 # The name/ acronym for the database
-db.name<-"CPRDAurum"
-#db.name<-"CPRDAurumCovid"
+db.name<-"CPRD_GOLD"
 
 # Set output folder location -----
 # the path to a folder where the results from this analysis will be saved
@@ -34,9 +31,8 @@ user<-Sys.getenv("DB_USER")
 password<- Sys.getenv("DB_PASSWORD")
 port<-Sys.getenv("DB_PORT") 
 host<-Sys.getenv("DB_HOST") 
-server_dbi<-Sys.getenv("DB_SERVER_cdm_aurum_202106_dbi") #aurum
-#server_dbi<-Sys.getenv("DB_SERVER_p20_059_cdm_aurum_dbi") #aurum covid
-
+server_dbi<-Sys.getenv("DB_SERVER_DBI_name_database") 
+dbmsName <- "postgresql"
 
 # Specify cdm_reference via DBI connection details -----
 # In this study we also use the DBI package to connect to the database
@@ -63,7 +59,7 @@ results_database_schema<-"results"
 # Name of outcome table in the result table where the outcome cohorts will be stored
 # Note, if there is an existing table in your results schema with the same names
 # it will be overwritten 
-outcome_table_stem<-"cancerincprev"
+outcome_table_stem<-"parkinsonismtest"
 
 # create cdm reference ----
 cdm <- CDMConnector::cdm_from_con(con = db, 

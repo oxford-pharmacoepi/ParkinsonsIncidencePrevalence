@@ -1,16 +1,5 @@
 ##############################################################################
 #                                                                            #
-#                               Set up                                       #
-#                                                                            #
-##############################################################################
-install.packages("remotes")
-remotes::install_github("darwin-eu/IncidencePrevalence")
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library("IncidencePrevalence")
-##############################################################################
-#                                                                            #
 #                              Making Denominators                           #
 #                                                                            #
 ##############################################################################
@@ -30,7 +19,7 @@ cdm$denominator <- generateDenominatorCohortSet(
 ##############################################################################
 prevSubtypes <- estimatePeriodPrevalence(cdm = cdm,
                                   denominatorTable = "denominator",
-                                  outcomeTable = '...', #The name of your choice for the table associated to parkinsonism subtypes
+                                  outcomeTable = subtype_table_name,
                                   outcomeCohortId = outcome_cohorts_subtypes$cohortId,
                                   outcomeCohortName = outcome_cohorts_subtypes$cohortName,
                                   interval = "Years",
@@ -40,6 +29,11 @@ prevSubtypes <- estimatePeriodPrevalence(cdm = cdm,
 
 PrevalenceTableSubtypes <- prevSubtypes %>%
   left_join(settings(prevSubtypes)) 
+
+###creating a folder for the plots
+plots.folder <- here("Results", db.name, "Plots")
+if (!file.exists(plots.folder)){
+  dir.create(plots.folder, recursive = TRUE)}
 
 # 1.Plots for prevalence of subtypes in the overall population
 SubtypesPrevalenceOverall<- PrevalenceTableSubtypes %>%
@@ -65,7 +59,7 @@ SubtypesPrevalenceOverall<- PrevalenceTableSubtypes %>%
 
 SubtypesPrevalenceOverallName <- paste0("SubtypesPrevalenceOverallPopulation", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", SubtypesPrevalenceOverallName),
+pdf(here("Results", db.name, "Plots", SubtypesPrevalenceOverallName),
     width = 7, height = 5)
 print(SubtypesPrevalenceOverall, newpage = FALSE)
 dev.off()
@@ -103,7 +97,7 @@ SubtypesPrevalenceBoth<- PrevalenceTableSubtypes %>%
 
 SubtypesPrevalenceBothName <- paste0("SubtypesPrevalenceBoth", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", SubtypesPrevalenceBothName),
+pdf(here("Results", db.name, "Plots", SubtypesPrevalenceBothName),
     width = 7, height = 5)
 print(SubtypesPrevalenceBoth, newpage = FALSE)
 dev.off()
@@ -141,7 +135,7 @@ SubtypesPrevalenceMale<- PrevalenceTableSubtypes %>%
 
 SubtypesPrevalenceMaleName <- paste0("SubtypesPrevalenceMale", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", SubtypesPrevalenceMaleName),
+pdf(here("Results", db.name, "Plots", SubtypesPrevalenceMaleName),
     width = 7, height = 5)
 print(SubtypesPrevalenceMale, newpage = FALSE)
 dev.off()
@@ -179,7 +173,7 @@ SubtypesPrevalenceFemale<- PrevalenceTableSubtypes %>%
 
 SubtypesPrevalenceFemaleName <- paste0("SubtypesPrevalenceFemale", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", SubtypesPrevalenceFemaleName),
+pdf(here("Results", db.name, "Plots", SubtypesPrevalenceFemaleName),
     width = 7, height = 5)
 print(SubtypesPrevalenceFemale, newpage = FALSE)
 dev.off()
@@ -216,7 +210,7 @@ SubtypesPrevalenceStratifiedByAgeAndSex<- PrevalenceTableSubtypes %>%
 
 SubtypesPrevalenceStratifiedByAgeAndSexName <- paste0("SubtypesPrevalenceStratifiedByAgeAndSex", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", SubtypesPrevalenceStratifiedByAgeAndSexName),
+pdf(here("Results", db.name, "Plots", SubtypesPrevalenceStratifiedByAgeAndSexName),
     width = 7, height = 5)
 print(SubtypesPrevalenceStratifiedByAgeAndSex, newpage = FALSE)
 dev.off()
@@ -230,7 +224,7 @@ dev.off()
 incSubtypes <- estimateIncidence(
   cdm = cdm,
   denominatorTable = "denominator",
-  outcomeTable = '...', #The name of your choice for the table associated to parkinsonism subtypes
+  outcomeTable = subtype_table_name,
   outcomeCohortId = outcome_cohorts_subtypes$cohortId,
   outcomeCohortName = outcome_cohorts_subtypes$cohortName,
   interval = "years",
@@ -266,7 +260,7 @@ SubtypesIncidenceOverall<- IncidenceTableSubtypes %>%
 
 SubtypesIncidenceOverallName <- paste0("SubtypesIncidenceOverallPopulation", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", SubtypesIncidenceOverallName),
+pdf(here("Results", db.name, "Plots", SubtypesIncidenceOverallName),
     width = 7, height = 5)
 print(SubtypesIncidenceOverall, newpage = FALSE)
 dev.off()
@@ -303,7 +297,7 @@ SubtypesIncidenceBoth<- IncidenceTableSubtypes %>%
 
 SubtypesIncidenceBothName <- paste0("SubtypesIncidenceBoth", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", SubtypesIncidenceBothName),
+pdf(here("Results", db.name, "Plots", SubtypesIncidenceBothName),
     width = 7, height = 5)
 print(SubtypesIncidenceBoth, newpage = FALSE)
 dev.off()
@@ -340,7 +334,7 @@ SubtypesIncidenceMale<- IncidenceTableSubtypes %>%
 
 SubtypesIncidenceMaleName <- paste0("SubtypesIncidenceMale", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", SubtypesIncidenceMaleName),
+pdf(here("Results", db.name, "Plots", SubtypesIncidenceMaleName),
     width = 7, height = 5)
 print(SubtypesIncidenceMale, newpage = FALSE)
 dev.off()
@@ -377,7 +371,7 @@ SubtypesIncidenceFemale<- IncidenceTableSubtypes %>%
 
 SubtypesIncidenceFemaleName <- paste0("SubtypesIncidenceFemale", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", SubtypesIncidenceFemaleName),
+pdf(here("Results", db.name, "Plots", SubtypesIncidenceFemaleName),
     width = 7, height = 5)
 print(SubtypesIncidenceFemale, newpage = FALSE)
 dev.off()
@@ -410,7 +404,7 @@ SubtypesIncidenceStratifiedByAgeAndSex<- IncidenceTableSubtypes %>%
 
 SubtypesIncidenceStratifiedByAgeAndSexName <- paste0("SubtypesIncidenceStratifiedByAgeAndSex", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", SubtypesIncidenceStratifiedByAgeAndSexName),
+pdf(here("Results", db.name, "Plots", SubtypesIncidenceStratifiedByAgeAndSexName),
     width = 7, height = 5)
 print(SubtypesIncidenceStratifiedByAgeAndSex, newpage = FALSE)
 dev.off()
@@ -423,8 +417,8 @@ dev.off()
 study_results <- gatherIncidencePrevalenceResults(
   cdm = cdm,
   resultList=list(incSubtypes, prevSubtypes),
-  databaseName = "...") #database name
+  databaseName = db.name)
 
 exportIncidencePrevalenceResults(result=study_results,
-                                 zipName= paste0("...", "IncidencePrevalenceResultsSubtypes"), #database name
-                                 outputFolder=here::here("2_AnalysisIncidencePrevalence"))
+                                 zipName= paste0(db.name, "IncidencePrevalenceResultsSubtypes"), 
+                                 outputFolder=here::here("Results", db.name))
