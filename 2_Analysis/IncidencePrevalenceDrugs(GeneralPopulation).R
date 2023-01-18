@@ -1,36 +1,11 @@
 ##############################################################################
 #                                                                            #
-#                               Set up                                       #
-#                                                                            #
-##############################################################################
-install.packages("remotes")
-remotes::install_github("darwin-eu/IncidencePrevalence")
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library("IncidencePrevalence")
-##############################################################################
-#                                                                            #
-#                              Making Denominators                           #
-#                                                                            #
-##############################################################################
-cdm$denominator <- generateDenominatorCohortSet(
-  cdm = cdm,
-  startDate = as.Date("2007-01-01"),
-  ageGroup = list(c(18,150), c(18, 30),c(31,40),c(41,50),c(51,60),c(61,70),c(71,80),c(81,150)),
-  sex = c("Female", "Male", "Both"),
-  daysPriorHistory = 365,
-  verbose = T
-)
-
-##############################################################################
-#                                                                            #
 #                                Prevalence                                  #
 #                                                                            #
 ##############################################################################
 prevDrugs <- estimatePeriodPrevalence(cdm = cdm,
                                       denominatorTable = "denominator",
-                                      outcomeTable = '...', #The name of your choice for the table associated to antiparkinson drugs
+                                      outcomeTable = drug_table_name, 
                                       outcomeCohortId = outcome_cohorts_drugs$cohortId,
                                       outcomeCohortName = outcome_cohorts_drugs$cohortName,
                                       interval = "Years",
@@ -65,7 +40,7 @@ DrugsPrevalenceOverall<- PrevalenceTableDrugs %>%
 
 DrugsPrevalenceOverallName <- paste0("DrugsPrevalenceOverallPopulation", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", DrugsPrevalenceOverallName),
+pdf(here("Results", db.name, "Plots", DrugsPrevalenceOverallName),
     width = 7, height = 5)
 print(DrugsPrevalenceOverall, newpage = FALSE)
 dev.off()
@@ -103,7 +78,7 @@ DrugsPrevalenceBoth<- PrevalenceTableDrugs %>%
 
 DrugsPrevalenceBothName <- paste0("DrugsPrevalenceBoth", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", DrugsPrevalenceBothName),
+pdf(here("Results", db.name, "Plots", DrugsPrevalenceBothName),
     width = 7, height = 5)
 print(DrugsPrevalenceBoth, newpage = FALSE)
 dev.off()
@@ -141,7 +116,7 @@ DrugsPrevalenceMale<- PrevalenceTableDrugs %>%
 
 DrugsPrevalenceMaleName <- paste0("DrugsPrevalenceMale", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", DrugsPrevalenceMaleName),
+pdf(here("Results", db.name, "Plots", DrugsPrevalenceMaleName),
     width = 7, height = 5)
 print(DrugsPrevalenceMale, newpage = FALSE)
 dev.off()
@@ -179,7 +154,7 @@ DrugsPrevalenceFemale<- PrevalenceTableDrugs %>%
 
 DrugsPrevalenceFemaleName <- paste0("DrugsPrevalenceFemale", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", DrugsPrevalenceFemaleName),
+pdf(here("Results", db.name, "Plots", DrugsPrevalenceFemaleName),
     width = 7, height = 5)
 print(DrugsPrevalenceFemale, newpage = FALSE)
 dev.off()
@@ -216,7 +191,7 @@ DrugsPrevalenceStratifiedByAgeAndSex<- PrevalenceTableDrugs %>%
 
 DrugsPrevalenceStratifiedByAgeAndSexName <- paste0("DrugsPrevalenceStratifiedByAgeAndSex", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", DrugsPrevalenceStratifiedByAgeAndSexName),
+pdf(here("Results", db.name, "Plots", DrugsPrevalenceStratifiedByAgeAndSexName),
     width = 7, height = 5)
 print(DrugsPrevalenceStratifiedByAgeAndSex, newpage = FALSE)
 dev.off()
@@ -230,7 +205,7 @@ dev.off()
 incDrugs <- estimateIncidence(
   cdm = cdm,
   denominatorTable = "denominator",
-  outcomeTable = '...', #The name of your choice for the table associated to antiparkinson drugs
+  outcomeTable = drug_table_name, 
   outcomeCohortId = outcome_cohorts_drugs$cohortId,
   outcomeCohortName = outcome_cohorts_drugs$cohortName,
   interval = "years",
@@ -266,7 +241,7 @@ DrugsIncidenceOverall<- IncidenceTableDrugs %>%
 
 DrugsIncidenceOverallName <- paste0("DrugsIncidenceOverallPopulation", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", DrugsIncidenceOverallName),
+pdf(here("Results", db.name, "Plots", DrugsIncidenceOverallName),
     width = 7, height = 5)
 print(DrugsIncidenceOverall, newpage = FALSE)
 dev.off()
@@ -303,7 +278,7 @@ DrugsIncidenceBoth<- IncidenceTableDrugs %>%
 
 DrugsIncidenceBothName <- paste0("DrugsIncidenceBoth", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", DrugsIncidenceBothName),
+pdf(here("Results", db.name, "Plots", DrugsIncidenceBothName),
     width = 7, height = 5)
 print(DrugsIncidenceBoth, newpage = FALSE)
 dev.off()
@@ -340,7 +315,7 @@ DrugsIncidenceMale<- IncidenceTableDrugs %>%
 
 DrugsIncidenceMaleName <- paste0("DrugsIncidenceMale", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", DrugsIncidenceMaleName),
+pdf(here("Results", db.name, "Plots", DrugsIncidenceMaleName),
     width = 7, height = 5)
 print(DrugsIncidenceMale, newpage = FALSE)
 dev.off()
@@ -377,7 +352,7 @@ DrugsIncidenceFemale<- IncidenceTableDrugs %>%
 
 DrugsIncidenceFemaleName <- paste0("DrugsIncidenceFemale", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", DrugsIncidenceFemaleName),
+pdf(here("Results", db.name, "Plots", DrugsIncidenceFemaleName),
     width = 7, height = 5)
 print(DrugsIncidenceFemale, newpage = FALSE)
 dev.off()
@@ -410,7 +385,7 @@ DrugsIncidenceStratifiedByAgeAndSex<- IncidenceTableDrugs %>%
 
 DrugsIncidenceStratifiedByAgeAndSexName <- paste0("DrugsIncidenceStratifiedByAgeAndSex", ".pdf")
 
-pdf(here("2_AnalysisIncidencePrevalence", "Plots", DrugsIncidenceStratifiedByAgeAndSexName),
+pdf(here("Results", db.name, "Plots", DrugsIncidenceStratifiedByAgeAndSexName),
     width = 7, height = 5)
 print(DrugsIncidenceStratifiedByAgeAndSex, newpage = FALSE)
 dev.off()
@@ -423,8 +398,8 @@ dev.off()
 study_results <- gatherIncidencePrevalenceResults(
   cdm = cdm,
   resultList=list(incDrugs, prevDrugs),
-  databaseName = "...") #database name
+  databaseName = db.name) 
 
 exportIncidencePrevalenceResults(result=study_results,
-                                 zipName= paste0("...", "IncidencePrevalenceResultsDrugs"), #database name
-                                 outputFolder=here::here("2_AnalysisIncidencePrevalence"))
+                                 zipName= paste0(db.name, "IncidencePrevalenceResultsDrugs"), 
+                                 outputFolder=here::here("Results", db.name))
