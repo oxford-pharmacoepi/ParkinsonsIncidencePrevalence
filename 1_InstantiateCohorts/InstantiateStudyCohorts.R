@@ -11,7 +11,7 @@ outcome_cohorts_drugs <- CDMConnector::readCohortSet(here(
                                   
 cdm <- CDMConnector::generateCohortSet(cdm = cdm,
                                        cohortSet = outcome_cohorts_drugs,
-                                       cohortTableName = subtype_table_name, 
+                                       cohortTableName = drug_table_name, 
                                        overwrite = TRUE
 ) 
 ################################################################################
