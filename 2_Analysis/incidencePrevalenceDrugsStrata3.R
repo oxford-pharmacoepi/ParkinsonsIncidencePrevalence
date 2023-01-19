@@ -83,7 +83,7 @@ DrugsPrevalenceBothSubtype3<- PrevalenceTableSubtype3 %>%
     limits = c(0, NA)
   ) +
   facet_wrap(~denominator_age_group) +
-  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in people with ", subtype3name, ", stratified by age"), 80))+
+  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in people with ", subtype3name, ", stratified by age"), 70))+
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1),
         panel.background = element_blank() ,
@@ -121,7 +121,7 @@ DrugsPrevalenceMaleSubtype3<- PrevalenceTableSubtype3 %>%
     limits = c(0, NA)
   ) +
   facet_wrap(~denominator_age_group) +
-  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in men with ", subtype3name, ", stratified by age"), 80))+
+  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in men with ", subtype3name, ", stratified by age"), 70))+
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1),
         panel.background = element_blank() ,
@@ -159,7 +159,7 @@ DrugsPrevalenceFemaleSubtype3<- PrevalenceTableSubtype3 %>%
     limits = c(0, NA)
   ) +
   facet_wrap(~denominator_age_group) +
-  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in women with ",subtype3name,", stratified by age"), 80))+
+  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in women with ",subtype3name,", stratified by age"), 70))+
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1),
         panel.background = element_blank() ,
@@ -283,7 +283,7 @@ DrugsIncidenceBothSubtype3<- IncidenceTableSubtype3 %>%
     limits = c(0, NA)
   ) +
   facet_wrap(~denominator_age_group) +
-  labs(title = str_wrap(paste0("Incidence of antiparkinson drugs in people with ",subtype3name,", stratified by age"), 80))+
+  labs(title = str_wrap(paste0("Incidence of antiparkinson drugs in people with ",subtype3name,", stratified by age"), 70))+
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1),
         panel.background = element_blank() ,
