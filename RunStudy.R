@@ -49,7 +49,7 @@ info(logger, 'ANALYSIS COMPLETE')
 # add code for combining and exporting results ---
 
 print("Done!")
-print("-- If all has worked, there should now be a zip folder with your results in the output folder to share")
+print("-- If all has worked, there should now be zip folders with your results as well as some default plots in the output folder (Results folder) to share")
 print("-- Thank you for running the study!")
 Sys.time()-start
 readLines(log_file)
