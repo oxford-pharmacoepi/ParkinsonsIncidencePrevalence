@@ -83,7 +83,7 @@ DrugsPrevalenceBothSubtype2<- PrevalenceTableSubtype2 %>%
     limits = c(0, NA)
   ) +
   facet_wrap(~denominator_age_group) +
-  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in people with ", subtype2name, ", stratified by age"), 80))+
+  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in people with ", subtype2name, ", stratified by age"), 70))+
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1),
         panel.background = element_blank() ,
@@ -121,7 +121,7 @@ DrugsPrevalenceMaleSubtype2<- PrevalenceTableSubtype2 %>%
     limits = c(0, NA)
   ) +
   facet_wrap(~denominator_age_group) +
-  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in men with ", subtype2name, ", stratified by age"), 80))+
+  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in men with ", subtype2name, ", stratified by age"), 70))+
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1),
         panel.background = element_blank() ,
@@ -159,7 +159,7 @@ DrugsPrevalenceFemaleSubtype2<- PrevalenceTableSubtype2 %>%
     limits = c(0, NA)
   ) +
   facet_wrap(~denominator_age_group) +
-  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in women with ",subtype2name,", stratified by age"), 80))+
+  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in women with ",subtype2name,", stratified by age"), 70))+
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1),
         panel.background = element_blank() ,
@@ -196,7 +196,7 @@ DrugsPrevalenceStratifiedByAgeAndSexSubtype2<- PrevalenceTableSubtype2 %>%
     limits = c(0, NA)
   ) +
   facet_grid(~denominator_age_group ~denominator_sex) +
-  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in people with ",subtype2name,", stratified by age and sex"), 80))+
+  labs(title = str_wrap(paste0("Prevalence of antiparkinson drugs in people with ",subtype2name,", stratified by age and sex"), 70))+
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1),
         panel.background = element_blank() ,
@@ -283,7 +283,7 @@ DrugsIncidenceBothSubtype2<- IncidenceTableSubtype2 %>%
     limits = c(0, NA)
   ) +
   facet_wrap(~denominator_age_group) +
-  labs(title = str_wrap(paste0("Incidence of antiparkinson drugs in people with ",subtype2name,", stratified by age"), 80))+
+  labs(title = str_wrap(paste0("Incidence of antiparkinson drugs in people with ",subtype2name,", stratified by age"), 70))+
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1),
         panel.background = element_blank() ,
@@ -393,7 +393,7 @@ DrugsIncidenceStratifiedByAgeAndSexSubtype2<- IncidenceTableSubtype2 %>%
     limits = c(0, NA)
   ) +
   facet_grid(~denominator_age_group ~denominator_sex) +
-  labs(title = str_wrap(paste0("Incidence of antiparkinson drugs in people with ",subtype2name,", stratified by age and sex"), 80))+
+  labs(title = str_wrap(paste0("Incidence of antiparkinson drugs in people with ",subtype2name,", stratified by age and sex"), 70))+
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1),
         panel.background = element_blank() ,
