@@ -73,5 +73,5 @@ cdm$person %>%
 
 # Run the study ------
 source(here("RunStudy.R"))
-# after the study is run you should have a zip folder in your output folder to share
+# after the study is run you should have zip folders in your output folder (Results) to share
 
