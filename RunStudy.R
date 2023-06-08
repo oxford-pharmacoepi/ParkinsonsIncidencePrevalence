@@ -1,3 +1,9 @@
+# create logger
+log_file <- paste0(output_folder, "/log.txt")
+logger <- create.logger()
+logfile(logger) <- log_file
+level(logger) <- "INFO"
+
 # table names----
 subtype_table_name<-paste0(outcome_table_stem,"_subtype")
 drug_table_name<-paste0(outcome_table_stem,"_drug")
