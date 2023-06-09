@@ -43,8 +43,7 @@
     "CriteriaList": [
       {
         "ConditionOccurrence": {
-          "CodesetId": 0,
-          "First": true
+          "CodesetId": 0
         }
       }
     ],
