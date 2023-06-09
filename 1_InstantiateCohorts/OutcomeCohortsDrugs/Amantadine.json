@@ -48,6 +48,13 @@
     "Type": "First"
   },
   "InclusionRules": [],
+  "EndStrategy": {
+    "CustomEra": {
+      "DrugCodesetId": 0,
+      "GapDays": 30,
+      "Offset": 0
+    }
+  },
   "CensoringCriteria": [],
   "CollapseSettings": {
     "CollapseType": "ERA",
