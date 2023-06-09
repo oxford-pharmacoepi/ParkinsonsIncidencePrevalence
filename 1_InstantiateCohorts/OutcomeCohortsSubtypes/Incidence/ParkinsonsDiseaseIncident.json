@@ -8,6 +8,21 @@
           {
             "concept": {
               "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "725146001",
+              "CONCEPT_ID": 37110776,
+              "CONCEPT_NAME": "Atypical juvenile parkinsonism",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "includeDescendants": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
               "CONCEPT_CODE": "716662004",
               "CONCEPT_ID": 37396747,
               "CONCEPT_NAME": "Autosomal dominant late onset Parkinson disease",
@@ -19,6 +34,21 @@
               "VOCABULARY_ID": "SNOMED"
             },
             "includeDescendants": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "230293003",
+              "CONCEPT_ID": 4046092,
+              "CONCEPT_NAME": "Carbon monoxide-induced parkinsonism",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
           },
           {
             "concept": {
@@ -98,21 +128,6 @@
           {
             "concept": {
               "CONCEPT_CLASS_ID": "Clinical Finding",
-              "CONCEPT_CODE": "76349003",
-              "CONCEPT_ID": 373747,
-              "CONCEPT_NAME": "Extrapyramidal disease",
-              "DOMAIN_ID": "Condition",
-              "INVALID_REASON": "V",
-              "INVALID_REASON_CAPTION": "Valid",
-              "STANDARD_CONCEPT": "S",
-              "STANDARD_CONCEPT_CAPTION": "Standard",
-              "VOCABULARY_ID": "SNOMED"
-            },
-            "isExcluded": true
-          },
-          {
-            "concept": {
-              "CONCEPT_CLASS_ID": "Clinical Finding",
               "CONCEPT_CODE": "43647007",
               "CONCEPT_ID": 4184466,
               "CONCEPT_NAME": "Juvenile paralysis agitans of Hunt",
@@ -143,9 +158,39 @@
           {
             "concept": {
               "CONCEPT_CLASS_ID": "Clinical Finding",
-              "CONCEPT_CODE": "111479008",
-              "CONCEPT_ID": 374009,
-              "CONCEPT_NAME": "Organic mental disorder",
+              "CONCEPT_CODE": "230294009",
+              "CONCEPT_ID": 4044052,
+              "CONCEPT_NAME": "Manganese-induced parkinsonism",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "15782007",
+              "CONCEPT_ID": 4049300,
+              "CONCEPT_NAME": "MPTP-induced parkinsonism",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "72820004",
+              "CONCEPT_ID": 4248716,
+              "CONCEPT_NAME": "Neuroleptic-induced Parkinsonism",
               "DOMAIN_ID": "Condition",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
@@ -218,6 +263,126 @@
           {
             "concept": {
               "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "766872002",
+              "CONCEPT_ID": 35624223,
+              "CONCEPT_NAME": "Parkinsonism caused by cyanide",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "722556003",
+              "CONCEPT_ID": 36716523,
+              "CONCEPT_NAME": "Parkinsonism co-occurrent and due to acute infection",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "724762006",
+              "CONCEPT_ID": 37110500,
+              "CONCEPT_NAME": "Parkinsonism due to and following injury of head",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "4223005",
+              "CONCEPT_ID": 4171569,
+              "CONCEPT_NAME": "Parkinsonism due to drug",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "722599008",
+              "CONCEPT_ID": 36716557,
+              "CONCEPT_NAME": "Parkinsonism due to hereditary spastic paraplegia",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "722965000",
+              "CONCEPT_ID": 36716784,
+              "CONCEPT_NAME": "Parkinsonism due to heredodegenerative disorder",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "includeDescendants": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "722557007",
+              "CONCEPT_ID": 36716524,
+              "CONCEPT_NAME": "Parkinsonism due to human immunodeficiency virus infection",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "722558002",
+              "CONCEPT_ID": 36716525,
+              "CONCEPT_NAME": "Parkinsonism following infection",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
               "CONCEPT_CODE": "230295005",
               "CONCEPT_ID": 4043380,
               "CONCEPT_NAME": "Parkinsonism with calcification of basal ganglia",
@@ -229,6 +394,21 @@
               "VOCABULARY_ID": "SNOMED"
             },
             "includeDescendants": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "19972008",
+              "CONCEPT_ID": 4064308,
+              "CONCEPT_NAME": "Postencephalitic parkinsonism",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
           },
           {
             "concept": {
@@ -263,6 +443,21 @@
           {
             "concept": {
               "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "230292008",
+              "CONCEPT_ID": 374013,
+              "CONCEPT_NAME": "Secondary parkinsonism",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
               "CONCEPT_CODE": "724761004",
               "CONCEPT_ID": 37110499,
               "CONCEPT_NAME": "Sporadic Parkinson disease",
@@ -274,6 +469,36 @@
               "VOCABULARY_ID": "SNOMED"
             },
             "includeDescendants": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "38523005",
+              "CONCEPT_ID": 373139,
+              "CONCEPT_NAME": "Syphilitic parkinsonism",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "230296006",
+              "CONCEPT_ID": 4046093,
+              "CONCEPT_NAME": "Vascular parkinsonism",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "isExcluded": true
           },
           {
             "concept": {
