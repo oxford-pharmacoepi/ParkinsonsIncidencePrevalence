@@ -1,25 +1,9 @@
-# create logger
-log_file <- paste0(output_folder, "/log.txt")
-logger <- create.logger()
-logfile(logger) <- log_file
-level(logger) <- "INFO"
-
 # table names----
-subtype_table_name<-paste0(outcome_table_stem,"_subtype")
+subtype_table_inc<-paste0(outcome_table_stem,"_subtype_incidence")
+subtype_table_prev<-paste0(outcome_table_stem,"_subtype_prevalence")
+
 drug_table_name<-paste0(outcome_table_stem,"_drug")
 
-# subtype names
-subtype1 <- outcome_cohorts_subtypes %>% filter (cohortId == "1")
-subtype1name <- paste0(subtype1[,"cohortName"])
-
-subtype2 <- outcome_cohorts_subtypes %>% filter (cohortId == "2")
-subtype2name <- paste0(subtype2[,"cohortName"])
-
-subtype3 <- outcome_cohorts_subtypes %>% filter (cohortId == "3")
-subtype3name <- paste0(subtype3[,"cohortName"])
-
-subtype4 <- outcome_cohorts_subtypes %>% filter (cohortId == "4")
-subtype4name <- paste0(subtype4[,"cohortName"])
 # output files ----
 if (!file.exists(output.folder)){
   dir.create(output.folder, recursive = TRUE)}
@@ -37,7 +21,7 @@ info(logger, 'INSTANTIATING STUDY COHORTS')
 source(here("1_InstantiateCohorts","InstantiateStudyCohorts.R"))
 info(logger, 'GOT STUDY COHORTS')
 
-# Run incidence rate analysis ----
+# Run incidence prevalence analysis ----
 info(logger, 'RUNNING PREVALENCE AND INCIDENCE RATE ANALYSIS FOR PARKINSONISM AND ITS SUBTYPES')
 source(here("2_Analysis","IncidencePrevalenceSubtypes(GeneralPopulation).R"))
 info(logger, 'ANALYSIS COMPLETE!')
@@ -57,6 +41,6 @@ info(logger, 'ANALYSIS COMPLETE')
 print("Done!")
 print("-- If all has worked, there should now be zip folders with your results as well as some default plots in the output folder (Results folder) to share")
 print("-- Thank you for running the study!")
-Sys.time()-start
+time_taken<-Sys.time()-start
 readLines(log_file)
 
