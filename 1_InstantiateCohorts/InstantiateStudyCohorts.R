@@ -11,7 +11,7 @@ outcome_cohorts_drugs <- CDMConnector::readCohortSet(here(
                                   
 cdm <- CDMConnector::generateCohortSet(cdm = cdm,
                                        cohortSet = outcome_cohorts_drugs,
-                                       cohortTableName = drug_table_name, 
+                                       name = drug_table_name, 
                                        overwrite = TRUE
 ) 
 ################################################################################
@@ -20,13 +20,26 @@ cdm <- CDMConnector::generateCohortSet(cdm = cdm,
 #                                                                              #
 ################################################################################
 
-outcome_cohorts_subtypes <- readCohortSet(here(
+outcome_cohorts_subtypes_incidence <- readCohortSet(here(
   "1_InstantiateCohorts",
-  "OutcomeCohortsSubtypes"
+  "OutcomeCohortsSubtypes",
+  "Incidence"
 ))
 
 cdm <- generateCohortSet(cdm = cdm, 
-                         cohortSet =  outcome_cohorts_subtypes,
-                         cohortTableName = subtype_table_name, 
+                         cohortSet = outcome_cohorts_subtypes_incidence,
+                         name = subtype_table_inc, 
+                         overwrite = TRUE
+)
+
+outcome_cohorts_subtypes_prevalence <- readCohortSet(here(
+  "1_InstantiateCohorts",
+  "OutcomeCohortsSubtypes",
+  "Prevalence"
+))
+
+cdm <- generateCohortSet(cdm = cdm, 
+                         cohortSet = outcome_cohorts_subtypes_prevalence,
+                         name = subtype_table_prev, 
                          overwrite = TRUE
 )

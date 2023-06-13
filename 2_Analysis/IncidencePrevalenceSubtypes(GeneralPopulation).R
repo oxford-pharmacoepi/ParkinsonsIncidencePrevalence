@@ -3,9 +3,9 @@
 #                              Making Denominators                           #
 #                                                                            #
 ##############################################################################
-cdm$denominator <- generateDenominatorCohortSet(
+cdm <- generateDenominatorCohortSet(
   cdm = cdm,
-  startDate = as.Date("2007-01-01"),
+  startDate = as.Date(c("2007-01-01", "2021-12-31")),
   ageGroup = list(c(18,150), c(18, 30),c(31,40),c(41,50),c(51,60),c(61,70),c(71,80),c(81,150)),
   sex = c("Female", "Male", "Both"),
   daysPriorHistory = 365,
