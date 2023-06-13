@@ -3,13 +3,14 @@
 #                              Making Denominators                           #
 #                                                                            #
 ##############################################################################
+info(logger, 'MAKING DENOMINATORS FOR THE GENERAL POPULATION')
 cdm <- generateDenominatorCohortSet(
   cdm = cdm,
-  startDate = as.Date(c("2007-01-01", "2021-12-31")),
+  name = "denominator_general_pop",
+  cohortDateRange = as.Date(c("2007-01-01", "2021-12-31")),
   ageGroup = list(c(18,150), c(18, 30),c(31,40),c(41,50),c(51,60),c(61,70),c(71,80),c(81,150)),
   sex = c("Female", "Male", "Both"),
-  daysPriorHistory = 365,
-  verbose = T
+  daysPriorHistory = 365
 )
 
 ##############################################################################
@@ -18,17 +19,12 @@ cdm <- generateDenominatorCohortSet(
 #                                                                            #
 ##############################################################################
 prevSubtypes <- estimatePeriodPrevalence(cdm = cdm,
-                                  denominatorTable = "denominator",
-                                  outcomeTable = subtype_table_name,
-                                  outcomeCohortId = outcome_cohorts_subtypes$cohortId,
-                                  outcomeCohortName = outcome_cohorts_subtypes$cohortName,
-                                  interval = "Years",
+                                  denominatorTable = "denominator_general_pop",
+                                  outcomeTable = subtype_table_prev,
+                                  outcomeLookbackDays = NULL,
+                                  interval = "years",
                                   minCellCount = 5,
-                                  completeDatabaseIntervals = F,
-                                  verbose = T)
-
-PrevalenceTableSubtypes <- prevSubtypes %>%
-  left_join(settings(prevSubtypes)) 
+                                  completeDatabaseIntervals = F)
 
 ###creating a folder for the plots
 plots.folder <- here("Results", db.name, "Plots")
@@ -223,19 +219,14 @@ dev.off()
 
 incSubtypes <- estimateIncidence(
   cdm = cdm,
-  denominatorTable = "denominator",
-  outcomeTable = subtype_table_name,
-  outcomeCohortId = outcome_cohorts_subtypes$cohortId,
-  outcomeCohortName = outcome_cohorts_subtypes$cohortName,
+  denominatorTable = "denominator_general_pop",
+  outcomeTable = subtype_table_inc,
   interval = "years",
   completeDatabaseIntervals = F,
   outcomeWashout = 0,
   repeatedEvents = FALSE,
-  minCellCount = 5,
-  verbose = T
+  minCellCount = 5
 )
-
-IncidenceTableSubtypes <- incSubtypes %>% left_join(settings(incSubtypes)) 
 
 # 1.Plots for incidence of parkinsonism in the overall population
 SubtypesIncidenceOverall<- IncidenceTableSubtypes %>%
