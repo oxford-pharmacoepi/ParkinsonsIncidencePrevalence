@@ -243,7 +243,7 @@ incSubtypes <- estimateIncidence(
 )
 
 # 1.Plots for incidence of parkinsonism in the overall population
-SubtypesIncidenceOverall<- IncidenceTableSubtypes %>%
+SubtypesIncidenceOverall<- incSubtypes %>%
   filter(denominator_cohort_id == 3) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
@@ -266,12 +266,12 @@ SubtypesIncidenceOverall<- IncidenceTableSubtypes %>%
 SubtypesIncidenceOverallName <- paste0("SubtypesIncidenceOverallPopulation", ".pdf")
 
 pdf(here("Results", db.name, "Plots", SubtypesIncidenceOverallName),
-    width = 7, height = 5)
+    width = 10, height = 8)
 print(SubtypesIncidenceOverall, newpage = FALSE)
 dev.off()
 
 #2. Plots for incidence of overall population of different age groups
-SubtypesIncidenceBoth<- IncidenceTableSubtypes %>%
+SubtypesIncidenceBoth<- incSubtypes %>%
   filter(denominator_sex == "Both") %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
@@ -303,12 +303,12 @@ SubtypesIncidenceBoth<- IncidenceTableSubtypes %>%
 SubtypesIncidenceBothName <- paste0("SubtypesIncidenceBoth", ".pdf")
 
 pdf(here("Results", db.name, "Plots", SubtypesIncidenceBothName),
-    width = 7, height = 5)
+    width = 10, height = 8)
 print(SubtypesIncidenceBoth, newpage = FALSE)
 dev.off()
 
 #3. Plots for incidence of men of different age groups
-SubtypesIncidenceMale<- IncidenceTableSubtypes %>%
+SubtypesIncidenceMale<- incSubtypes %>%
   filter(denominator_sex == "Male") %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
@@ -340,12 +340,12 @@ SubtypesIncidenceMale<- IncidenceTableSubtypes %>%
 SubtypesIncidenceMaleName <- paste0("SubtypesIncidenceMale", ".pdf")
 
 pdf(here("Results", db.name, "Plots", SubtypesIncidenceMaleName),
-    width = 7, height = 5)
+    width = 10, height = 8)
 print(SubtypesIncidenceMale, newpage = FALSE)
 dev.off()
 
 #4. Plots for incidence of women of different age groups
-SubtypesIncidenceFemale<- IncidenceTableSubtypes %>%
+SubtypesIncidenceFemale<- incSubtypes %>%
   filter(denominator_sex == "Female") %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
@@ -377,12 +377,12 @@ SubtypesIncidenceFemale<- IncidenceTableSubtypes %>%
 SubtypesIncidenceFemaleName <- paste0("SubtypesIncidenceFemale", ".pdf")
 
 pdf(here("Results", db.name, "Plots", SubtypesIncidenceFemaleName),
-    width = 7, height = 5)
+    width = 10, height = 8)
 print(SubtypesIncidenceFemale, newpage = FALSE)
 dev.off()
 
 #5. Plots for incidence overall
-SubtypesIncidenceStratifiedByAgeAndSex<- IncidenceTableSubtypes %>%
+SubtypesIncidenceStratifiedByAgeAndSex<- incSubtypes %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
