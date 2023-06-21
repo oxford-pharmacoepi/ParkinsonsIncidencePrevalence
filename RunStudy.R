@@ -8,7 +8,7 @@ drug_table_name<-paste0(outcome_table_stem,"_drug")
 if (!file.exists(output.folder)){
   dir.create(output.folder, recursive = TRUE)}
 
-start<-Sys.time()
+tictoc::tic()
 
 # start log ----
 log_file <- paste0(output.folder, "/log.txt")
