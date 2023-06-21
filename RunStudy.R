@@ -43,4 +43,3 @@ print("-- If all has worked, there should now be zip folders with your results a
 print("-- Thank you for running the study!")
 time_taken<-Sys.time()-start
 readLines(log_file)
-
