@@ -7,7 +7,7 @@ info(logger, 'MAKING DENOMINATORS FOR THE GENERAL POPULATION')
 cdm <- generateDenominatorCohortSet(
   cdm = cdm,
   name = "denominator_general_pop",
-  cohortDateRange = as.Date(c("2007-01-01", "2021-12-31")),
+  cohortDateRange = as.Date(c("2007-01-01", NULL)),
   ageGroup = list(c(18,150), c(18, 30),c(31,40),c(41,50),c(51,60),c(61,70),c(71,80),c(81,150)),
   sex = c("Female", "Male", "Both"),
   daysPriorHistory = 365
@@ -21,10 +21,8 @@ cdm <- generateDenominatorCohortSet(
 prevSubtypes <- estimatePeriodPrevalence(cdm = cdm,
                                   denominatorTable = "denominator_general_pop",
                                   outcomeTable = subtype_table_prev,
-                                  outcomeLookbackDays = NULL,
-                                  interval = "years",
-                                  minCellCount = 5,
-                                  completeDatabaseIntervals = F)
+                                  outcomeLookbackDays = NULL, #discuss
+                                  interval = "years")
 
 ###creating a folder for the plots
 plots.folder <- here("Results", db.name, "Plots")
@@ -236,18 +234,18 @@ incSubtypes <- estimateIncidence(
   denominatorTable = "denominator_general_pop",
   outcomeTable = subtype_table_inc,
   interval = "years",
-  completeDatabaseIntervals = F,
   outcomeWashout = 0,
-  repeatedEvents = FALSE,
+  repeatedEvents = TRUE,
   minCellCount = 5
 )
 
 # 1.Plots for incidence of parkinsonism in the overall population
 SubtypesIncidenceOverall<- incSubtypes %>%
-  filter(denominator_cohort_id == 3) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
+  filter(denominator_age_group == '18;150', denominator_sex == "Both") %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
@@ -261,6 +259,7 @@ SubtypesIncidenceOverall<- incSubtypes %>%
         axis.line = element_line(colour = "black", size = 0.6) ,
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
         legend.key = element_rect(fill = "transparent", colour = "transparent")) +
+  theme(plot.title = element_text(hjust = 0.5)) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
 SubtypesIncidenceOverallName <- paste0("SubtypesIncidenceOverallPopulation", ".pdf")
@@ -273,17 +272,19 @@ dev.off()
 #2. Plots for incidence of overall population of different age groups
 SubtypesIncidenceBoth<- incSubtypes %>%
   filter(denominator_sex == "Both") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "(18, 150)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "(18, 30)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "(31, 40)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "41;50", "(41, 50)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "51;60", "(51, 60)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "61;70", "(61, 70)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "71;80", "(71, 80)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81;150", "(81, 150)")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "Over 18 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "Between 18 and 30 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "Between 30 and 40 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "41;50", "Between 40 and 50 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "51;60", "Between 50 and 60 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "61;70", "Between 60 and 70 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "71;80", "Between 70 and 80 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81;150", "Over 80 years old")) %>%
+  mutate(across(denominator_age_group, factor, levels=c("Over 18 years old","Between 18 and 30 years old","Between 30 and 40 years old", "Between 40 and 50 years old", "Between 50 and 60 years old", "Between 60 and 70 years old", "Between 70 and 80 years old", "Over 80 years old"))) %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
@@ -298,6 +299,7 @@ SubtypesIncidenceBoth<- incSubtypes %>%
         axis.line = element_line(colour = "black", size = 0.6) ,
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
         legend.key = element_rect(fill = "transparent", colour = "transparent")) +
+  theme(plot.title = element_text(hjust = 0.5)) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
 SubtypesIncidenceBothName <- paste0("SubtypesIncidenceBoth", ".pdf")
@@ -310,17 +312,19 @@ dev.off()
 #3. Plots for incidence of men of different age groups
 SubtypesIncidenceMale<- incSubtypes %>%
   filter(denominator_sex == "Male") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "(18, 150)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "(18, 30)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "(31, 40)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "41;50", "(41, 50)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "51;60", "(51, 60)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "61;70", "(61, 70)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "71;80", "(71, 80)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81;150", "(81, 150)")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "Over 18 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "Between 18 and 30 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "Between 30 and 40 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "41;50", "Between 40 and 50 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "51;60", "Between 50 and 60 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "61;70", "Between 60 and 70 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "71;80", "Between 70 and 80 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81;150", "Over 80 years old")) %>%
+  mutate(across(denominator_age_group, factor, levels=c("Over 18 years old","Between 18 and 30 years old","Between 30 and 40 years old", "Between 40 and 50 years old", "Between 50 and 60 years old", "Between 60 and 70 years old", "Between 70 and 80 years old", "Over 80 years old"))) %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
@@ -335,6 +339,7 @@ SubtypesIncidenceMale<- incSubtypes %>%
         axis.line = element_line(colour = "black", size = 0.6) ,
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
         legend.key = element_rect(fill = "transparent", colour = "transparent")) +
+  theme(plot.title = element_text(hjust = 0.5)) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
 SubtypesIncidenceMaleName <- paste0("SubtypesIncidenceMale", ".pdf")
@@ -347,17 +352,19 @@ dev.off()
 #4. Plots for incidence of women of different age groups
 SubtypesIncidenceFemale<- incSubtypes %>%
   filter(denominator_sex == "Female") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "(18, 150)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "(18, 30)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "(31, 40)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "41;50", "(41, 50)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "51;60", "(51, 60)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "61;70", "(61, 70)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "71;80", "(71, 80)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81;150", "(81, 150)")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "Over 18 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "Between 18 and 30 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "Between 30 and 40 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "41;50", "Between 40 and 50 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "51;60", "Between 50 and 60 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "61;70", "Between 60 and 70 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "71;80", "Between 70 and 80 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81;150", "Over 80 years old")) %>%
+  mutate(across(denominator_age_group, factor, levels=c("Over 18 years old","Between 18 and 30 years old","Between 30 and 40 years old", "Between 40 and 50 years old", "Between 50 and 60 years old", "Between 60 and 70 years old", "Between 70 and 80 years old", "Over 80 years old"))) %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
@@ -372,6 +379,7 @@ SubtypesIncidenceFemale<- incSubtypes %>%
         axis.line = element_line(colour = "black", size = 0.6) ,
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
         legend.key = element_rect(fill = "transparent", colour = "transparent")) +
+  theme(plot.title = element_text(hjust = 0.5)) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
 SubtypesIncidenceFemaleName <- paste0("SubtypesIncidenceFemale", ".pdf")
@@ -383,17 +391,19 @@ dev.off()
 
 #5. Plots for incidence overall
 SubtypesIncidenceStratifiedByAgeAndSex<- incSubtypes %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "(18, 150)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "(18, 30)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "(31, 40)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "41;50", "(41, 50)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "51;60", "(51, 60)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "61;70", "(61, 70)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "71;80", "(71, 80)")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81;150", "(81, 150)")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "Over 18 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "Between 18 and 30 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "Between 30 and 40 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "41;50", "Between 40 and 50 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "51;60", "Between 50 and 60 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "61;70", "Between 60 and 70 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "71;80", "Between 70 and 80 years old")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81;150", "Over 80 years old")) %>%
+  mutate(across(denominator_age_group, factor, levels=c("Over 18 years old","Between 18 and 30 years old","Between 30 and 40 years old", "Between 40 and 50 years old", "Between 50 and 60 years old", "Between 60 and 70 years old", "Between 70 and 80 years old", "Over 80 years old"))) %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
@@ -405,12 +415,13 @@ SubtypesIncidenceStratifiedByAgeAndSex<- incSubtypes %>%
         axis.line = element_line(colour = "black", size = 0.6) ,
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
         legend.key = element_rect(fill = "transparent", colour = "transparent")) +
+  theme(plot.title = element_text(hjust = 0.5)) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
 SubtypesIncidenceStratifiedByAgeAndSexName <- paste0("SubtypesIncidenceStratifiedByAgeAndSex", ".pdf")
 
 pdf(here("Results", db.name, "Plots", SubtypesIncidenceStratifiedByAgeAndSexName),
-    width = 7, height = 5)
+    width = 20, height = 8)
 print(SubtypesIncidenceStratifiedByAgeAndSex, newpage = FALSE)
 dev.off()
 

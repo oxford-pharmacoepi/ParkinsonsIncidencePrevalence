@@ -41,5 +41,5 @@ info(logger, 'ANALYSIS COMPLETE')
 print("Done!")
 print("-- If all has worked, there should now be zip folders with your results as well as some default plots in the output folder (Results folder) to share")
 print("-- Thank you for running the study!")
-time_taken<-Sys.time()-start
+tictoc::toc()
 readLines(log_file)
