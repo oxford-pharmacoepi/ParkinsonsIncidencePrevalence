@@ -18,6 +18,7 @@ cdm <- generateDenominatorCohortSet(
 #                                Prevalence                                  #
 #                                                                            #
 ##############################################################################
+info(logger, 'PREVALENCE OF SUBTYPES FOR THE GENERAL POPULATION')
 prevSubtypes <- estimatePeriodPrevalence(cdm = cdm,
                                   denominatorTable = "denominator_general_pop",
                                   outcomeTable = subtype_table_prev,
@@ -228,7 +229,7 @@ dev.off()
 #                                Incidence                                   #
 #                                                                            #
 ##############################################################################
-
+info(logger, 'INCIDENCE OF SUBTYPES FOR THE GENERAL POPULATION')
 incSubtypes <- estimateIncidence(
   cdm = cdm,
   denominatorTable = "denominator_general_pop",
@@ -430,6 +431,7 @@ dev.off()
 #                            Gather & export                                 #
 #                                                                            #
 ##############################################################################
+info(logger, 'GATHERING RESULTS FOR SUBTYPES FOR THE GENERAL POPULATION')
 study_results <- gatherIncidencePrevalenceResults(
   cdm = cdm,
   resultList=list(incSubtypes, prevSubtypes),
