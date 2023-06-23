@@ -7,7 +7,7 @@ info(logger, 'MAKING DENOMINATORS FOR THE GENERAL POPULATION')
 cdm <- generateDenominatorCohortSet(
   cdm = cdm,
   name = "denominator_general_pop",
-  cohortDateRange = as.Date(c("2007-01-01", NULL)),
+  cohortDateRange = as.Date(c("2007-01-01", NA)),
   ageGroup = list(c(18,150), c(18, 30),c(31,40),c(41,50),c(51,60),c(61,70),c(71,80),c(81,150)),
   sex = c("Female", "Male", "Both"),
   daysPriorHistory = 365
@@ -408,7 +408,7 @@ SubtypesIncidenceStratifiedByAgeAndSex<- incSubtypes %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
-  facet_grid(~denominator_age_group ~denominator_sex) +
+  facet_grid(~denominator_sex ~denominator_age_group) +
   ggtitle("Prevalence of parkinsonism, stratified by both age and sex") + 
   labs(colour = "Parkinsonism and its subtypes") +
   theme(axis.text.x = element_text(angle = 45, hjust=1), 
@@ -432,11 +432,6 @@ dev.off()
 #                                                                            #
 ##############################################################################
 info(logger, 'GATHERING RESULTS FOR SUBTYPES FOR THE GENERAL POPULATION')
-study_results <- gatherIncidencePrevalenceResults(
-  cdm = cdm,
-  resultList=list(incSubtypes, prevSubtypes),
-  databaseName = db.name)
-
-exportIncidencePrevalenceResults(result=study_results,
-                                 zipName= paste0(db.name, "IncidencePrevalenceResultsSubtypes"), 
+exportIncidencePrevalenceResults(resultList = list("Prevalence of Subtypes" = prevSubtypes, "Incidence of Subtypes" = incSubtypes),
+                                 zipName= paste0(db.name, "_IncidencePrevalenceResultsSubtypes"), 
                                  outputFolder=here::here("Results", db.name))
