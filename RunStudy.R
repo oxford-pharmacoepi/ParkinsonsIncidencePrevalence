@@ -8,7 +8,11 @@ subtypesCohortSet<-cohortSet(cdm[[subtype_table_inc]]) %>%
   mutate(cohort_name = case_when(cohort_name == "DrugInducedParkinsonismIncident" ~ "Drug Induced Parkinsonism",
                                  cohort_name == "ParkinsonismIncident" ~ "Parkinsonism",
                                  cohort_name == "ParkinsonsDiseaseIncident" ~ "Parkinson's Disease",
-                                 cohort_name == "VascularParkinsonismIncident" ~ "Vascular Parkinsonism"))
+                                 cohort_name == "VascularParkinsonismIncident" ~ "Vascular Parkinsonism")) %>%
+  mutate(cohort_name_camel = case_when(cohort_name == "Drug Induced Parkinsonism" ~ "DrugInducedParkinsonism",
+                                       cohort_name == "Parkinsonism" ~ "Parkinsonism",
+                                       cohort_name == "Parkinson's Disease" ~ "ParkinsonsDisease",
+                                       cohort_name == "Vascular Parkinsonism" ~ "VascularParkinsonism"))
 # output files ----
 if (!file.exists(output.folder)){
   dir.create(output.folder, recursive = TRUE)}
