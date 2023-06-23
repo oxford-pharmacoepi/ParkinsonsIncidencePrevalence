@@ -4,6 +4,11 @@ subtype_table_prev<-paste0(outcome_table_stem,"_subtype_prevalence")
 
 drug_table_name<-paste0(outcome_table_stem,"_drug")
 
+subtypesCohortSet<-cohortSet(cdm[[subtype_table_inc]]) %>% 
+  mutate(cohort_name = case_when(cohort_name == "DrugInducedParkinsonismIncident" ~ "Drug Induced Parkinsonism",
+                                 cohort_name == "ParkinsonismIncident" ~ "Parkinsonism",
+                                 cohort_name == "ParkinsonsDiseaseIncident" ~ "Parkinson's Disease",
+                                 cohort_name == "VascularParkinsonismIncident" ~ "Vascular Parkinsonism"))
 # output files ----
 if (!file.exists(output.folder)){
   dir.create(output.folder, recursive = TRUE)}
@@ -32,10 +37,17 @@ info(logger, 'ANALYSIS COMPLETE')
 
 info(logger, 'RUNNING PREVALENCE AND INCIDENCE RATE ANALYSIS FOR DRUG USE IN THE DISEASE STRATA')
 source(here("2_Analysis","incidencePrevalenceDrugsStrata1.R"))
+info(logger, paste0("Incidence and prevalence of drugs in ", subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name), " is done"))
+
 source(here("2_Analysis","incidencePrevalenceDrugsStrata2.R"))
+info(logger, paste0("Incidence and prevalence of drugs in ", subtypesCohortSet %>% filter(cohort_definition_id==2) %>% pull(cohort_name), " is done"))
+
 source(here("2_Analysis","incidencePrevalenceDrugsStrata3.R"))
+info(logger, paste0("Incidence and prevalence of drugs in ", subtypesCohortSet %>% filter(cohort_definition_id==3) %>% pull(cohort_name), " is done"))
+
 source(here("2_Analysis","incidencePrevalenceDrugsStrata4.R"))
-info(logger, 'ANALYSIS COMPLETE')
+info(logger, paste0("Incidence and prevalence of drugs in ", subtypesCohortSet %>% filter(cohort_definition_id==4) %>% pull(cohort_name), " is done"))
+
 # add code for combining and exporting results ---
 
 print("Done!")
