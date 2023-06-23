@@ -10,12 +10,11 @@ prevDrugs <- estimatePeriodPrevalence(cdm = cdm,
                                       outcomeLookbackDays = 30) #discuss
 
 # 1.Plots for prevalence of the drug use in the overall population
-DrugsPrevalenceOverall<- PrevalenceTableDrugs %>%
+DrugsPrevalenceOverall<- prevDrugs %>%
   filter(denominator_age_group == '18;150', denominator_sex == "Both") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "COMTInhibitor", "COMT Inhibitors")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DopamineAgonists", "Dopamine Agonists")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "MAOBInhibitors", "MAO-B Inhibitors")) %>%
   ggplot(aes(x = prevalence_start_date, y=prevalence, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_ribbon(aes(ymin = prevalence_95CI_lower, ymax = prevalence_95CI_upper, fill = outcome_cohort_name), alpha = .5, color = NA, show.legend = F) +
   geom_point() +
@@ -41,12 +40,11 @@ print(DrugsPrevalenceOverall, newpage = FALSE)
 dev.off()
 
 #2. Plots for prevalence of overall population of different age groups
-DrugsPrevalenceBoth<- PrevalenceTableDrugs %>%
+DrugsPrevalenceBoth<- prevDrugs %>%
   filter(denominator_sex == "Both") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "COMTInhibitor", "COMT Inhibitors")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DopamineAgonists", "Dopamine Agonists")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "MAOBInhibitors", "MAO-B Inhibitors")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "Over 18 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "Between 18 and 30 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "Between 30 and 40 years old")) %>%
@@ -82,12 +80,11 @@ print(DrugsPrevalenceBoth, newpage = FALSE)
 dev.off()
 
 #3. Plots for prevalence of men of different age groups
-DrugsPrevalenceMale<- PrevalenceTableDrugs %>%
+DrugsPrevalenceMale<- prevDrugs %>%
   filter(denominator_sex == "Male") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "COMTInhibitor", "COMT Inhibitors")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DopamineAgonists", "Dopamine Agonists")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "MAOBInhibitors", "MAO-B Inhibitors")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "Over 18 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "Between 18 and 30 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "Between 30 and 40 years old")) %>%
@@ -123,12 +120,11 @@ print(DrugsPrevalenceMale, newpage = FALSE)
 dev.off()
 
 #4. Plots for prevalence of women of different age groups
-DrugsPrevalenceFemale<- PrevalenceTableDrugs %>%
+DrugsPrevalenceFemale<- prevDrugs %>%
   filter(denominator_sex == "Female") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "COMTInhibitor", "COMT Inhibitors")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DopamineAgonists", "Dopamine Agonists")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "MAOBInhibitors", "MAO-B Inhibitors")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "Over 18 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "Between 18 and 30 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "Between 30 and 40 years old")) %>%
@@ -138,6 +134,7 @@ DrugsPrevalenceFemale<- PrevalenceTableDrugs %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "71;80", "Between 70 and 80 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81;150", "Over 80 years old")) %>%
   mutate(across(denominator_age_group, factor, levels=c("Over 18 years old","Between 18 and 30 years old","Between 30 and 40 years old", "Between 40 and 50 years old", "Between 50 and 60 years old", "Between 60 and 70 years old", "Between 70 and 80 years old", "Over 80 years old"))) %>%
+  ggplot(aes(x = prevalence_start_date, y=prevalence, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_ribbon(aes(ymin = prevalence_95CI_lower, ymax = prevalence_95CI_upper, fill = outcome_cohort_name), alpha = .5, color = NA, show.legend = F) +
   geom_point() +
   scale_y_continuous(
@@ -163,11 +160,10 @@ print(DrugsPrevalenceFemale, newpage = FALSE)
 dev.off()
 
 #5. Plots for prevalence overall
-DrugsPrevalenceStratifiedByAgeAndSex<- PrevalenceTableDrugs %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+DrugsPrevalenceStratifiedByAgeAndSex<- prevDrugs %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "COMTInhibitor", "COMT Inhibitors")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DopamineAgonists", "Dopamine Agonists")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "MAOBInhibitors", "MAO-B Inhibitors")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "Over 18 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "Between 18 and 30 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "Between 30 and 40 years old")) %>%
@@ -184,7 +180,7 @@ DrugsPrevalenceStratifiedByAgeAndSex<- PrevalenceTableDrugs %>%
     labels = scales::percent,
     limits = c(0, NA)
   ) +
-  facet_grid(~denominator_age_group ~denominator_sex) +
+  facet_grid(~denominator_sex ~denominator_age_group) +
   ggtitle("Prevalence of antiparkinson drugs, stratified by both age and sex") + 
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1), 
@@ -218,12 +214,11 @@ incDrugs <- estimateIncidence(
 )
 
 # 1.Plots for incidence of the drug use in the overall population
-DrugsIncidenceOverall<- IncidenceTableDrugs %>%
+DrugsIncidenceOverall<- incDrugs %>%
   filter(denominator_age_group == '18;150', denominator_sex == "Both") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "COMTInhibitor", "COMT Inhibitors")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DopamineAgonists", "Dopamine Agonists")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "MAOBInhibitors", "MAO-B Inhibitors")) %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
@@ -237,8 +232,8 @@ DrugsIncidenceOverall<- IncidenceTableDrugs %>%
         axis.line = element_line(colour = "black", size = 0.6) ,
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
         legend.key = element_rect(fill = "transparent", colour = "transparent")) +
+  theme(plot.title = element_text(hjust = 0.5)) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
-theme(plot.title = element_text(hjust = 0.5)) +
 
 DrugsIncidenceOverallName <- paste0("DrugsIncidenceOverallPopulation", ".pdf")
 
@@ -248,12 +243,11 @@ print(DrugsIncidenceOverall, newpage = FALSE)
 dev.off()
 
 #2. Plots for incidence of overall population of different age groups
-DrugsIncidenceBoth<- IncidenceTableDrugs %>%
+DrugsIncidenceBoth<- incDrugs %>%
   filter(denominator_sex == "Both") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "COMTInhibitor", "COMT Inhibitors")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DopamineAgonists", "Dopamine Agonists")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "MAOBInhibitors", "MAO-B Inhibitors")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "Over 18 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "Between 18 and 30 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "Between 30 and 40 years old")) %>%
@@ -288,12 +282,11 @@ print(DrugsIncidenceBoth, newpage = FALSE)
 dev.off()
 
 #3. Plots for incidence of men of different age groups
-DrugsIncidenceMale<- IncidenceTableDrugs %>%
+DrugsIncidenceMale<- incDrugs %>%
   filter(denominator_sex == "Male") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "COMTInhibitor", "COMT Inhibitors")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DopamineAgonists", "Dopamine Agonists")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "MAOBInhibitors", "MAO-B Inhibitors")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "Over 18 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "Between 18 and 30 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "Between 30 and 40 years old")) %>%
@@ -328,12 +321,11 @@ print(DrugsIncidenceMale, newpage = FALSE)
 dev.off()
 
 #4. Plots for incidence of women of different age groups
-DrugsIncidenceFemale<- IncidenceTableDrugs %>%
+DrugsIncidenceFemale<- incDrugs %>%
   filter(denominator_sex == "Female") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "COMTInhibitor", "COMT Inhibitors")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DopamineAgonists", "Dopamine Agonists")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "MAOBInhibitors", "MAO-B Inhibitors")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "Over 18 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "Between 18 and 30 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "Between 30 and 40 years old")) %>%
@@ -368,11 +360,10 @@ print(DrugsIncidenceFemale, newpage = FALSE)
 dev.off()
 
 #5. Plots for incidence overall
-DrugsIncidenceStratifiedByAgeAndSex<- IncidenceTableDrugs %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonismPrevalent", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonismPrevalent", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDiseasePrevalent", "Parkinson's Disease")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonismPrevalent", "Parkinsonism")) %>%
+DrugsIncidenceStratifiedByAgeAndSex<- incDrugs %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "COMTInhibitor", "COMT Inhibitors")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DopamineAgonists", "Dopamine Agonists")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "MAOBInhibitors", "MAO-B Inhibitors")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;150", "Over 18 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18;30", "Between 18 and 30 years old")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "31;40", "Between 30 and 40 years old")) %>%
@@ -385,7 +376,7 @@ DrugsIncidenceStratifiedByAgeAndSex<- IncidenceTableDrugs %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
-  facet_grid(~denominator_age_group ~denominator_sex) +
+  facet_grid(~denominator_sex ~denominator_age_group) +
   ggtitle("Prevalence of antiparkinson drugs, stratified by both age and sex") + 
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1), 
@@ -409,11 +400,6 @@ dev.off()
 #                                                                            #
 ##############################################################################
 info(logger, 'GATHERING RESULTS FOR ANTIPARKINSON FOR THE GENERAL POPULATION')
-study_results <- gatherIncidencePrevalenceResults(
-  cdm = cdm,
-  resultList=list(incDrugs, prevDrugs),
-  databaseName = db.name) 
-
-exportIncidencePrevalenceResults(result=study_results,
-                                 zipName= paste0(db.name, "IncidencePrevalenceResultsDrugs"), 
+exportIncidencePrevalenceResults(resultList = list("Prevalence of Antiparkinson drugs" = prevDrugs, "Incidence of Antiparkinson Drugs" = incDrugs),
+                                 zipName= paste0(db.name, "_IncidencePrevalenceResultsDrugs"), 
                                  outputFolder=here::here("Results", db.name))
