@@ -233,7 +233,7 @@ incSubtype1 <- estimateIncidence(
 
 # 1.Plots for incidence of the drug use in subtype 1
 DrugsIncidenceOverallSubtype1<- incSubtype1 %>%
-  filter(denominator_cohort_id == 3) %>%
+  filter(denominator_age_group == '18 to 150', denominator_sex == "Both") %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "COMTInhibitor", "COMT Inhibitors")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DopamineAgonists", "Dopamine Agonists")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "MAOBInhibitors", "MAO-B Inhibitors")) %>%
