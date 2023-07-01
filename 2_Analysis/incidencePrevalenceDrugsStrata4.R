@@ -22,8 +22,7 @@ cdm <- generateDenominatorCohortSet(
 ##############################################################################
 prevSubtype4 <- estimatePeriodPrevalence(cdm = cdm,
                                          denominatorTable = subtypesCohortSet %>% filter(cohort_definition_id==4) %>% pull(cohort_name),
-                                         outcomeTable = drug_table_name,
-                                         outcomeLookbackDays = 30)
+                                         outcomeTable = drug_table_name)
 
 # 1.Plots for prevalence of the drug use in subtype 4
 DrugsPrevalenceOverallSubtype4<- prevSubtype4 %>%
@@ -219,11 +218,7 @@ dev.off()
 incSubtype4 <- estimateIncidence(
   cdm = cdm,
   denominatorTable = subtypesCohortSet %>% filter(cohort_definition_id==4) %>% pull(cohort_name),
-  outcomeTable = drug_table_name,
-  interval = "years",
-  completeDatabaseIntervals = F,
-  outcomeWashout = 30,
-  repeatedEvents = TRUE
+  outcomeTable = drug_table_name
 )
 
 # 1.Plots for incidence of the drug use in subtype 4
@@ -411,6 +406,6 @@ dev.off()
 #                                                                            #
 ##############################################################################
 info(logger, paste0('Gathering results for antiparkinson drugs in ', subtypesCohortSet %>% filter(cohort_definition_id==4) %>% pull(cohort_name)))
-exportIncidencePrevalenceResults(resultList = list(paste0("Prevalence of antiparkinson drugs in ", subtypesCohortSet %>% filter(cohort_definition_id==4) %>% pull(cohort_name)) = prevSubtype4,paste0("Incidence of antiparkinson drugs in ", subtypesCohortSet %>% filter(cohort_definition_id==4) %>% pull(cohort_name)) = incSubtype4),
+exportIncidencePrevalenceResults(resultList = list("Prevalence of antiparkinson drugs" = prevSubtype4, "Incidence of antiparkinson drugs" = incSubtype4),
                                  zipName= paste0(db.name, "_IncidencePrevalenceResultsDrugsIn", subtypesCohortSet %>% filter(cohort_definition_id==4) %>% pull(cohort_name_camel)),
                                  outputFolder=here::here("Results", db.name))

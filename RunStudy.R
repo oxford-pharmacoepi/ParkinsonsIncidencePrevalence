@@ -1,7 +1,5 @@
 # table names----
-subtype_table_inc<-paste0(outcome_table_stem,"_subtype_incidence")
-subtype_table_prev<-paste0(outcome_table_stem,"_subtype_prevalence")
-
+subtype_table_name<-paste0(outcome_table_stem,"_subtype")
 drug_table_name<-paste0(outcome_table_stem,"_drug")
 
 # output files ----

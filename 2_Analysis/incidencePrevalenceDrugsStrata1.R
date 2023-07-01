@@ -11,7 +11,7 @@ cdm <- generateDenominatorCohortSet(
   ageGroup = list(c(18,150),c(18, 30),c(31,40),c(41,50),c(51,60),c(61,70),c(71,80),c(81,150)),
   sex = c("Female", "Male", "Both"),
   daysPriorHistory = 365,
-  strataTable = subtype_table_inc, 
+  strataTable = subtype_table_name, 
   strataCohortId = 1
 )
 
@@ -23,8 +23,7 @@ cdm <- generateDenominatorCohortSet(
 info(logger, paste0('Obtaining the prevalence of antiparkinson drugs in ', subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name)))
 prevSubtype1 <- estimatePeriodPrevalence(cdm = cdm,
                                          denominatorTable = subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name),
-                                         outcomeTable = drug_table_name,
-                                         outcomeLookbackDays = 30)
+                                         outcomeTable = drug_table_name)
 
 # 1.Plots for prevalence of the drug use in subtype 1
 DrugsPrevalenceOverallSubtype1<- prevSubtype1 %>%
@@ -224,11 +223,7 @@ info(logger, paste0('Obtaining the incidence of antiparkinson drugs in ', subtyp
 incSubtype1 <- estimateIncidence(
   cdm = cdm,
   denominatorTable = subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name),
-  outcomeTable = drug_table_name,
-  interval = "years",
-  completeDatabaseIntervals = F,
-  outcomeWashout = 30,
-  repeatedEvents = TRUE
+  outcomeTable = drug_table_name
 )
 
 # 1.Plots for incidence of the drug use in subtype 1
@@ -421,6 +416,6 @@ dev.off()
 #                                                                            #
 ##############################################################################
 info(logger, paste0('Gathering results for antiparkinson drugs in ', subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name)))
-exportIncidencePrevalenceResults(resultList = list(paste0("Prevalence of antiparkinson drugs in ", subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name)) = prevSubtype1,paste0("Incidence of antiparkinson drugs in ", subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name)) = incSubtype1),
+exportIncidencePrevalenceResults(resultList = list("Prevalence of antiparkinson drugs" = prevSubtype1, "Incidence of antiparkinson drugs" = incSubtype1),
                                  zipName= paste0(db.name, "_IncidencePrevalenceResultsDrugsIn", subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name_camel)),
                                  outputFolder=here::here("Results", db.name))
