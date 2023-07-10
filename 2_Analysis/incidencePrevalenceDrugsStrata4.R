@@ -3,7 +3,7 @@
 #                              Making Denominators                           #
 #                                                                            #
 ##############################################################################
-info(logger, paste0('Making', subtypesCohortSet %>% filter(cohort_definition_id=4) %>% pull(cohort_name), "into denominators" ))
+info(logger, paste0('Making', subtypesCohortSet %>% filter(cohort_definition_id==4) %>% pull(cohort_name), "into denominators" ))
 cdm <- generateDenominatorCohortSet(
   cdm = cdm,
   name = subtypesCohortSet %>% filter(cohort_definition_id==4) %>% pull(cohort_name),
