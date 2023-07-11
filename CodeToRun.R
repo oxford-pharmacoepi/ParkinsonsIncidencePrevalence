@@ -17,6 +17,7 @@ library(CDMConnector)
 library(ggplot2)
 library(SqlRender)
 library(testthat)
+library(scales)
 
 # database metadata and connection details -----
 # The name/ acronym for the database

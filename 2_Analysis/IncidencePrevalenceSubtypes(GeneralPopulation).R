@@ -243,9 +243,7 @@ SubtypesIncidenceOverall<- incSubtypes %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
-  scale_y_continuous(
-    limits = c(0, NA)
-  ) +
+  scale_y_continuous(labels = label_comma()) +
   ggtitle("Incidence of parkinsonism in the overall population") + 
   labs(colour = "Parkinsonism and its subtypes") +
   theme(axis.text.x = element_text(angle = 45, hjust=1), 
@@ -282,9 +280,7 @@ SubtypesIncidenceBoth<- incSubtypes %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
-  scale_y_continuous(
-    limits = c(0, NA)
-  ) +
+  scale_y_continuous(labels = label_comma()) +
   facet_wrap(~denominator_age_group) +
   ggtitle("Incidence of parkinsonism in the overall population, stratified by age") + 
   labs(colour = "Parkinsonism and its subtypes") +
@@ -322,9 +318,7 @@ SubtypesIncidenceMale<- incSubtypes %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
-  scale_y_continuous(
-    limits = c(0, NA)
-  ) +
+  scale_y_continuous(labels = label_comma()) +
   facet_wrap(~denominator_age_group) +
   ggtitle("Incidence of parkinsonism in men, stratified by age") + 
   labs(colour = "Parkinsonism and its subtypes") +
@@ -362,9 +356,7 @@ SubtypesIncidenceFemale<- incSubtypes %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
-  scale_y_continuous(
-    limits = c(0, NA)
-  ) +
+  scale_y_continuous(labels = label_comma()) +
   facet_wrap(~denominator_age_group) +
   ggtitle("Incidence of parkinsonism in women, stratified by age") + 
   labs(colour = "Parkinsonism and its subtypes") +
@@ -410,6 +402,7 @@ SubtypesIncidenceStratifiedByAgeAndSex<- incSubtypes %>%
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
         legend.key = element_rect(fill = "transparent", colour = "transparent")) +
   theme(plot.title = element_text(hjust = 0.5)) +
+  scale_y_continuous(labels = label_comma()) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
 SubtypesIncidenceStratifiedByAgeAndSexName <- paste0("SubtypesIncidenceStratifiedByAgeAndSex", ".pdf")

@@ -218,9 +218,7 @@ DrugsIncidenceOverall<- incDrugs %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
-  scale_y_continuous(
-    limits = c(0, NA)
-  ) +
+  scale_y_continuous(labels = label_comma()) +
   ggtitle("Incidence of antiparkinson drugs in the overall population") + 
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1), 
@@ -256,9 +254,7 @@ DrugsIncidenceBoth<- incDrugs %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
-  scale_y_continuous(
-    limits = c(0, NA)
-  ) +
+  scale_y_continuous(labels = label_comma()) +
   facet_wrap(~denominator_age_group) +
   ggtitle("Incidence of antiparkinson drugs in the overall population, stratified by age") + 
   labs(colour = "Parkinsonism Medications") +
@@ -295,9 +291,7 @@ DrugsIncidenceMale<- incDrugs %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
-  scale_y_continuous(
-    limits = c(0, NA)
-  ) +
+  scale_y_continuous(labels = label_comma()) +
   facet_wrap(~denominator_age_group) +
   ggtitle("Incidence of antiparkinson drugs in men, stratified by age") + 
   labs(colour = "Parkinsonism Medications") +
@@ -334,9 +328,7 @@ DrugsIncidenceFemale<- incDrugs %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_errorbar(width=0)+
   geom_point() +
-  scale_y_continuous(
-    limits = c(0, NA)
-  ) +
+  scale_y_continuous(labels = label_comma()) +
   facet_wrap(~denominator_age_group) +
   ggtitle("Incidence of antiparkinson drugs in women, stratified by age") + 
   labs(colour = "Parkinsonism Medications") +
@@ -373,7 +365,7 @@ DrugsIncidenceStratifiedByAgeAndSex<- incDrugs %>%
   geom_errorbar(width=0)+
   geom_point() +
   facet_grid(~denominator_sex ~denominator_age_group) +
-  ggtitle("Prevalence of antiparkinson drugs, stratified by both age and sex") + 
+  ggtitle("Incidence of antiparkinson drugs, stratified by both age and sex") + 
   labs(colour = "Parkinsonism Medications") +
   theme(axis.text.x = element_text(angle = 45, hjust=1), 
         panel.background = element_blank() ,
@@ -381,6 +373,7 @@ DrugsIncidenceStratifiedByAgeAndSex<- incDrugs %>%
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
         legend.key = element_rect(fill = "transparent", colour = "transparent")) +
   theme(plot.title = element_text(hjust = 0.5)) +
+  scale_y_continuous(labels = label_comma()) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
 DrugsIncidenceStratifiedByAgeAndSexName <- paste0("DrugsIncidenceStratifiedByAgeAndSex", ".pdf")
