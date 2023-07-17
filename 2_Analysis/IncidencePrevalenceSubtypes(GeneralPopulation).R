@@ -394,7 +394,7 @@ SubtypesIncidenceStratifiedByAgeAndSex<- incSubtypes %>%
   geom_errorbar(width=0)+
   geom_point() +
   facet_grid(~denominator_sex ~denominator_age_group) +
-  ggtitle("Prevalence of parkinsonism, stratified by both age and sex") + 
+  ggtitle("Incidence of parkinsonism, stratified by both age and sex") + 
   labs(colour = "Parkinsonism and its subtypes") +
   theme(axis.text.x = element_text(angle = 45, hjust=1), 
         panel.background = element_blank() ,
