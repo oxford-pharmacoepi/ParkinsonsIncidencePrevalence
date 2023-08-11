@@ -1,10 +1,14 @@
 # table names----
 subtype_table_name<-paste0(outcome_table_stem,"_subtype")
+subtype_table_name_1y<-paste0(outcome_table_stem,"_subtype_1y")
 drug_table_name<-paste0(outcome_table_stem,"_drug")
 
 # output files ----
 if (!file.exists(output.folder)){
   dir.create(output.folder, recursive = TRUE)}
+
+if (!file.exists(output.folder.plots)){
+  dir.create(output.folder.plots, recursive = TRUE)}
 
 tictoc::tic()
 

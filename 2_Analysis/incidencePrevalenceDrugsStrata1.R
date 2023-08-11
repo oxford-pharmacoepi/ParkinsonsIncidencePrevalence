@@ -15,6 +15,17 @@ cdm <- generateDenominatorCohortSet(
   strataCohortId = 1
 )
 
+cdm <- generateDenominatorCohortSet(
+  cdm = cdm,
+  name = paste0(subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name),"1y"),
+  cohortDateRange = as.Date(c("2007-01-01", NA)),
+  ageGroup = list(c(18,150),c(18, 30),c(31,40),c(41,50),c(51,60),c(61,70),c(71,80),c(81,150)),
+  sex = c("Female", "Male", "Both"),
+  daysPriorHistory = 365,
+  strataTable = subtype_table_name_1y, 
+  strataCohortId = subtypesCohortSet_1y %>% filter(cohort_name == subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name)) %>% pull(cohort_definition_id)
+)
+
 ##############################################################################
 #                                                                            #
 #                                Prevalence                                  #
@@ -222,7 +233,7 @@ dev.off()
 info(logger, paste0('Obtaining the incidence of antiparkinson drugs in ', subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name)))
 incSubtype1 <- estimateIncidence(
   cdm = cdm,
-  denominatorTable = subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name),
+  denominatorTable = paste0(subtypesCohortSet %>% filter(cohort_definition_id==1) %>% pull(cohort_name),"1y"),
   outcomeTable = drug_table_name
 )
 

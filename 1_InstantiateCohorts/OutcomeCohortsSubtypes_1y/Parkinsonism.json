@@ -1622,6 +1622,12 @@
     "Type": "First"
   },
   "InclusionRules": [],
+  "EndStrategy": {
+    "DateOffset": {
+      "DateField": "StartDate",
+      "Offset": 365
+    }
+  },
   "CensoringCriteria": [],
   "CollapseSettings": {
     "CollapseType": "ERA",

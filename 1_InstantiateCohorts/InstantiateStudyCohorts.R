@@ -31,7 +31,28 @@ cdm <- generateCohortSet(cdm = cdm,
                          overwrite = TRUE
 )
 
+outcome_cohorts_subtypes_1y <- readCohortSet(here(
+  "1_InstantiateCohorts",
+  "OutcomeCohortsSubtypes_1y"
+))
+
+cdm <- generateCohortSet(cdm = cdm, 
+                         cohortSet = outcome_cohorts_subtypes_1y,
+                         name = subtype_table_name_1y, 
+                         overwrite = TRUE
+)
+
 subtypesCohortSet<-cohortSet(cdm[[subtype_table_name]]) %>% 
+  mutate(cohort_name = case_when(cohort_name == "DrugInducedParkinsonism" ~ "Drug Induced Parkinsonism",
+                                 cohort_name == "Parkinsonism" ~ "Parkinsonism",
+                                 cohort_name == "ParkinsonsDisease" ~ "Parkinson's Disease",
+                                 cohort_name == "VascularParkinsonism" ~ "Vascular Parkinsonism")) %>%
+  mutate(cohort_name_camel = case_when(cohort_name == "Drug Induced Parkinsonism" ~ "DrugInducedParkinsonism",
+                                       cohort_name == "Parkinsonism" ~ "Parkinsonism",
+                                       cohort_name == "Parkinson's Disease" ~ "ParkinsonsDisease",
+                                       cohort_name == "Vascular Parkinsonism" ~ "VascularParkinsonism"))
+
+subtypesCohortSet_1y<-cohortSet(cdm[[subtype_table_name_1y]]) %>% 
   mutate(cohort_name = case_when(cohort_name == "DrugInducedParkinsonism" ~ "Drug Induced Parkinsonism",
                                  cohort_name == "Parkinsonism" ~ "Parkinsonism",
                                  cohort_name == "ParkinsonsDisease" ~ "Parkinson's Disease",
