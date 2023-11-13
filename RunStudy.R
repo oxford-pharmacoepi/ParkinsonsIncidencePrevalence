@@ -1,7 +1,7 @@
 # table names----
-subtype_table_name<-paste0(outcome_table_stem,"_subtype")
-subtype_table_name_1y<-paste0(outcome_table_stem,"_subtype_1y")
-drug_table_name<-paste0(outcome_table_stem,"_drug")
+# subtype_table_name<-paste0(outcome_table_stem,"_subtype")
+# subtype_table_name_1y<-paste0(outcome_table_stem,"_subtype_1y")
+# drug_table_name<-paste0(outcome_table_stem,"_drug")
 
 # output files ----
 if (!file.exists(output.folder)){

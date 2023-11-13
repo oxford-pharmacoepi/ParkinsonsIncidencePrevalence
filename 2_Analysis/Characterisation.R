@@ -92,5 +92,41 @@ cdm_char <-CDMConnector::cdm_from_con(
 )
 cdm_char[["parkinsonism"]] <- newGeneratedCohortSet(cohortRef = cdm[["parkinsonism"]],
                                                                     cohortSetRef = parkinsonism_set,
-                                                                    cohortCountRef = parkinsonism_count)
+                                                                    cohortCountRef = parkinsonism_count,
+                                                    overwrite = T)
 cdm_char <- cdmSubsetCohort(cdm_char, "parkinsonism", verbose = T)
+
+# instantiate medications
+info(logger, "INSTANTIATE MEDICATIONS - IMMINENT COHORT")
+codelistMedications <- codesFromConceptSet(here("1_InstantiateCohorts", "Medications"), cdm_char)
+cdm_char <- generateDrugUtilisationCohortSet(cdm = cdm_char, name = medications, conceptSet = codelistMedications)
+
+# instantiate conditions
+info(logger, "INSTANTIATE CONDITIONS - IMMINENT COHORT")
+codelistConditions <- codesFromConceptSet(here("1_InstantiateCohorts", "Conditions"), cdm_char)
+cdm_char <- generateConceptCohortSet(cdm = cdm_char, name = conditions, conceptSet = codelistConditions, overwrite = T)
+
+# create table summary
+info(logger, "CREATE SUMMARY - IMMINENT COHORT")
+result_pip <- cdm_char[["parkinsonism"]] %>%
+  summariseCharacteristics(
+    ageGroup = list(c(18, 30), c(31, 40), c(41, 50), c(51, 60), c(61, 70), c(71,80), c(81,90), c(91,100), c(101,150)),
+    tableIntersect = list(
+      "Visits" = list(
+        tableName = "visit_occurrence", value = "count", window = c(-365, 0)
+      ),
+      "Medications" = list(
+        tableName = "drug_era", value = "count", window = c(-365, 0)
+      )
+    ), 
+    cohortIntersect = list(
+      "Medications" = list(
+        targetCohortTable = medications, value = "flag", window = c(-365, 0)
+      ),
+      "Conditions" = list(
+        targetCohortTable = conditions, value = "flag", window = c(-Inf, 0)
+      )
+    )
+  )
+write_csv(result_pip, here(output.folder, "table_one_parkinsonsIP.csv"))
+info(logger, "TABLE 1 IS DONE")

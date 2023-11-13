@@ -11,7 +11,7 @@ outcome_cohorts_drugs <- CDMConnector::readCohortSet(here(
                                   
 cdm <- CDMConnector::generateCohortSet(cdm = cdm,
                                        cohortSet = outcome_cohorts_drugs,
-                                       name = drug_table_name, 
+                                       name = "parkinson_drugs", 
                                        overwrite = TRUE
 ) 
 ################################################################################
@@ -27,7 +27,7 @@ outcome_cohorts_subtypes <- readCohortSet(here(
 
 cdm <- generateCohortSet(cdm = cdm, 
                          cohortSet = outcome_cohorts_subtypes,
-                         name = subtype_table_name, 
+                         name = "parkinson_subtypes", 
                          overwrite = TRUE
 )
 
@@ -38,11 +38,11 @@ outcome_cohorts_subtypes_1y <- readCohortSet(here(
 
 cdm <- generateCohortSet(cdm = cdm, 
                          cohortSet = outcome_cohorts_subtypes_1y,
-                         name = subtype_table_name_1y, 
+                         name = "parkinson_subtypes_1y", 
                          overwrite = TRUE
 )
 
-subtypesCohortSet<-cohortSet(cdm[[subtype_table_name]]) %>% 
+subtypesCohortSet<-cohortSet(cdm[["parkinson_subtypes"]]) %>% 
   mutate(cohort_name = case_when(cohort_name == "DrugInducedParkinsonism" ~ "Drug Induced Parkinsonism",
                                  cohort_name == "Parkinsonism" ~ "Parkinsonism",
                                  cohort_name == "ParkinsonsDisease" ~ "Parkinson's Disease",
@@ -52,7 +52,7 @@ subtypesCohortSet<-cohortSet(cdm[[subtype_table_name]]) %>%
                                        cohort_name == "Parkinson's Disease" ~ "ParkinsonsDisease",
                                        cohort_name == "Vascular Parkinsonism" ~ "VascularParkinsonism"))
 
-subtypesCohortSet_1y<-cohortSet(cdm[[subtype_table_name_1y]]) %>% 
+subtypesCohortSet_1y<-cohortSet(cdm[["parkinson_subtypes_1y"]]) %>% 
   mutate(cohort_name = case_when(cohort_name == "DrugInducedParkinsonism" ~ "Drug Induced Parkinsonism",
                                  cohort_name == "Parkinsonism" ~ "Parkinsonism",
                                  cohort_name == "ParkinsonsDisease" ~ "Parkinson's Disease",
