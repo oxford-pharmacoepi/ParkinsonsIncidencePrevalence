@@ -20,6 +20,7 @@ library(testthat)
 library(scales)
 library(PatientProfiles)
 library(DrugUtilisation)
+library(CodelistGenerator)
 
 # database metadata and connection details -----
 # The name/ acronym for the database
