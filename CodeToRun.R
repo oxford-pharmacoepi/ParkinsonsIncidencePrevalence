@@ -18,6 +18,8 @@ library(ggplot2)
 library(tictoc)
 library(testthat)
 library(scales)
+library(PatientProfiles)
+library(DrugUtilisation)
 
 # database metadata and connection details -----
 # The name/ acronym for the database
@@ -60,12 +62,12 @@ cdm_database_schema<-"public"
 vocabulary_database_schema<-cdm_database_schema
 
 # The name of the schema where results tables will be created 
-results_database_schema<-"results"
+results_database_schema<-c(schema = "results", prefix = "xc_parkinson_")
 
 # Name of outcome table in the result table where the outcome cohorts will be stored
 # Note, if there is an existing table in your results schema with the same names
 # it will be overwritten 
-outcome_table_stem<-"..."
+# outcome_table_stem<-"p_ip"
 
 # create cdm reference ----
 cdm <- CDMConnector::cdm_from_con(con = db, 
