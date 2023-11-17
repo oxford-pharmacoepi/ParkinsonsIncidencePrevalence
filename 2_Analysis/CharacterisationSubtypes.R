@@ -130,3 +130,24 @@ result_pip <- cdm_char[["parkinsonism"]] %>%
   )
 write_csv(result_pip, here(output.folder, "table_one_parkinsonsIP.csv"))
 info(logger, "TABLE 1 IS DONE")
+
+### reformat 
+table_one_1 <- result_pip %>%
+  dplyr::filter(group_level == "Druginducedparkinsonism")
+
+table_one_2 <- result_pip %>%
+  dplyr::filter(group_level == "Parkinsonism")
+
+table_one_3 <- result_pip %>%
+  dplyr::filter(group_level == "Parkinsonsdisease")
+
+table_one_4 <- result_pip %>%
+  dplyr::filter(group_level == "Vascularparkinsonism")
+
+reformatted_table_1 <- reformat_table_one(table_one_1 = table_one_1,
+                   table_one_2 = table_one_2,
+                   table_one_3 = table_one_3,
+                   table_one_4 = table_one_4)
+
+write_csv(reformatted_table_1, here(output.folder, "table_one_parkinsonsIP_reformatted.csv"))
+info(logger, "REFORMATTING TABLE 1 IS DONE")

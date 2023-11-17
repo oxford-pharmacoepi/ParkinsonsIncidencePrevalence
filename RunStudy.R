@@ -18,6 +18,8 @@ logger <- create.logger()
 logfile(logger) <- log_file
 level(logger) <- "INFO"
 
+source(here("function.R"))
+
 # instantiate study cohorts ----
 info(logger, 'INSTANTIATING STUDY COHORTS')
 source(here("1_InstantiateCohorts","InstantiateStudyCohorts.R"))
