@@ -39,6 +39,26 @@ reformat_table_one <- function(table_one_1, table_one_2, table_one_3, table_one_
     )
   }
   
+  # sex
+  reformatted_table1 <- rbind(reformatted_table1, data.frame(x = "Sex, Female, n(%)",
+                                                             y = paste0(table_one_1 %>% dplyr::filter(variable_level == "Female") %>% dplyr::filter(estimate_type == "count") %>% dplyr::pull(estimate),
+                                                                        " (",
+                                                                        round(as.numeric(table_one_1 %>% dplyr::filter(variable_level == "Female") %>% dplyr::filter(estimate_type == "percentage") %>% dplyr::pull(estimate)), digits = 1),
+                                                                        ")"),
+                                                             z = paste0(table_one_2 %>% dplyr::filter(variable_level == "Female") %>% dplyr::filter(estimate_type == "count") %>% dplyr::pull(estimate),
+                                                                        " (",
+                                                                        round(as.numeric(table_one_2 %>% dplyr::filter(variable_level == "Female") %>% dplyr::filter(estimate_type == "percentage") %>% dplyr::pull(estimate)), digits = 1),
+                                                                        ")"),
+                                                             w = paste0(table_one_3 %>% dplyr::filter(variable_level == "Female") %>% dplyr::filter(estimate_type == "count") %>% dplyr::pull(estimate),
+                                                                        " (",
+                                                                        round(as.numeric(table_one_3 %>% dplyr::filter(variable_level == "Female") %>% dplyr::filter(estimate_type == "percentage") %>% dplyr::pull(estimate)), digits = 1),
+                                                                        ")"),
+                                                             u = paste0(table_one_4 %>% dplyr::filter(variable_level == "Female") %>% dplyr::filter(estimate_type == "count") %>% dplyr::pull(estimate),
+                                                                        " (",
+                                                                        round(as.numeric(table_one_3 %>% dplyr::filter(variable_level == "Female") %>% dplyr::filter(estimate_type == "percentage") %>% dplyr::pull(estimate)), digits = 1),
+                                                                        ")")
+                                                             ))
+  
   # age group variables
   age_var <- table_one_1 %>% 
     dplyr::filter(variable == "Age group") %>% 
