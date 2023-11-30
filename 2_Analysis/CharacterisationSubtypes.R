@@ -133,16 +133,16 @@ info(logger, "TABLE 1 IS DONE")
 
 ### reformat 
 table_one_1 <- result_pip %>%
-  dplyr::filter(group_level == "Druginducedparkinsonism")
+  dplyr::filter(group_level == "Druginducedparkinsonism", strata_level == "Overall")
 
 table_one_2 <- result_pip %>%
-  dplyr::filter(group_level == "Parkinsonism")
+  dplyr::filter(group_level == "Parkinsonism", strata_level == "Overall")
 
 table_one_3 <- result_pip %>%
-  dplyr::filter(group_level == "Parkinsonsdisease")
+  dplyr::filter(group_level == "Parkinsonsdisease", strata_level == "Overall")
 
 table_one_4 <- result_pip %>%
-  dplyr::filter(group_level == "Vascularparkinsonism")
+  dplyr::filter(group_level == "Vascularparkinsonism", strata_level == "Overall")
 
 reformatted_table_1 <- reformat_table_one(table_one_1 = table_one_1,
                    table_one_2 = table_one_2,
