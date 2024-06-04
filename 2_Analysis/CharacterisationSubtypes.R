@@ -151,3 +151,5 @@ reformatted_table_1 <- reformat_table_one(table_one_1 = table_one_1,
 
 write_csv(reformatted_table_1, here(output.folder, "table_one_parkinsonsIP_reformatted.csv"))
 info(logger, "REFORMATTING TABLE 1 IS DONE")
+####### attrition reports
+write_csv(inc_attr, here(output.folder, "inc_attr.csv"))
