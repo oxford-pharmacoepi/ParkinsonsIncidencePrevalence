@@ -36,8 +36,7 @@ SubtypesPrevalenceOverall<- prevSubtypes %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "PD")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "Parkinsonism", "Parkinsonism")) %>% 
   ggplot(aes(x = prevalence_start_date, y=prevalence, group = outcome_cohort_name, color = outcome_cohort_name)) +
-  scale_color_manual(values = c("DIP" = "black", "PD" = "red", "Parkinsonism" = "blue", "VP" = "#8839A2"), 
-                     name = "fill")+
+  scale_color_manual(values = c("DIP" = "black", "PD" = "red", "Parkinsonism" = "blue", "VP" = "#8839A2"))+
   geom_ribbon(aes(ymin = prevalence_95CI_lower, ymax = prevalence_95CI_upper), alpha = 0.5, show.legend = F) +
   geom_point(aes(colour = outcome_cohort_name), size = 6) +
   scale_y_continuous(
@@ -59,16 +58,16 @@ SubtypesPrevalenceOverall<- prevSubtypes %>%
   xlab("Time") + ylab("Prevalence")
 
 SubtypesPrevalenceOverallName <- paste0("SubtypesPrevalenceOverallPopulation", ".png")
-png(here("Results", db.name, "Plots", SubtypesPrevalenceOverallName), width = 18, height = 10, units = "in", res = 1500)
+png(here("Results", db.name, "Plots", SubtypesPrevalenceOverallName), width = 15, height = 8, units = "in", res = 1500)
 print(SubtypesPrevalenceOverall, newpage = FALSE)
 dev.off()
 
 #2. Plots for prevalence - stratified by sex
 SubtypesPrevalenceSex<- prevSubtypes %>%
   filter(denominator_age_group == '18 to 150' & (denominator_sex != "Both")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "DIP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "VP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "PD")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "Parkinsonism", "Parkinsonism")) %>%
   ggplot(aes(x = prevalence_start_date, y=prevalence, group = factor(outcome_cohort_name), color = factor(outcome_cohort_name))) +
   geom_ribbon(aes(ymin = prevalence_95CI_lower, ymax = prevalence_95CI_upper), alpha = 0.5, show.legend = F) +
@@ -79,7 +78,7 @@ SubtypesPrevalenceSex<- prevSubtypes %>%
     limits = c(0, NA)
   ) + 
   labs(colour = "Parkinsonism and subtypes") +
-  scale_color_manual(values = c("black", "red", "blue", "#8839A2"))+
+  scale_color_manual(values = c("black", "blue", "red", "#8839A2"))+
   theme(axis.text.x = element_text(angle = 45, hjust=1, size = 15, face = "bold"),
         axis.text.y = element_text(size = 15, face = "bold"),
         axis.title.x = element_text(size = 20, face = "bold"),
@@ -94,20 +93,20 @@ SubtypesPrevalenceSex<- prevSubtypes %>%
   xlab("Time") + ylab("Prevalence")
 
 SubtypesPrevalenceSexName <- paste0("SubtypesPrevalenceStratifiedBySex", ".png")
-png(here("Results", db.name, "Plots", SubtypesPrevalenceSexName), width = 18, height = 10, units = "in", res = 1500)
+png(here("Results", db.name, "Plots", SubtypesPrevalenceSexName), width = 15, height = 8, units = "in", res = 1500)
 print(SubtypesPrevalenceSex, newpage = FALSE)
 dev.off()
 
 #3. Plots for prevalence - stratified by age
 SubtypesPrevalenceAge<- prevSubtypes %>%
   filter(denominator_sex == "Both") %>%
-  filter(!(denominator_age_group %in% c("18 to 150", "18 to 30", "31 to 40"))) %>% 
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
+  filter(!(denominator_age_group %in% c("18 to 150", "18 to 30"))) %>% 
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "DIP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "VP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "PD")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "Parkinsonism", "Parkinsonism")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81 to 150", "Over 80")) %>%
-  mutate(across(denominator_age_group, factor, levels=c("Over 18","18 to 30","31 to 40", "41 to 50", "51 to 60", "61 to 70", "71 to 80", "Over 80"))) %>%
+  mutate(across(denominator_age_group, factor, levels=c("31 to 40", "41 to 50", "51 to 60", "61 to 70", "71 to 80", "Over 80"))) %>%
   ggplot(aes(x = prevalence_start_date, y=prevalence, group = factor(outcome_cohort_name), color = factor(outcome_cohort_name))) +
   geom_ribbon(aes(ymin = prevalence_95CI_lower, ymax = prevalence_95CI_upper), alpha = 0.5, show.legend = F) +
   geom_point(aes(colour = factor(outcome_cohort_name)), size = 3) +
@@ -117,7 +116,7 @@ SubtypesPrevalenceAge<- prevSubtypes %>%
     limits = c(0, NA)
   ) + 
   labs(colour = "Parkinsonism and subtypes") +
-  scale_color_manual(values = c("black", "red", "blue", "#8839A2"))+
+  scale_color_manual(values = c("black", "blue", "red", "#8839A2"))+
   theme(axis.text.x = element_text(angle = 45, hjust=1, size = 15, face = "bold"),
         axis.text.y = element_text(size = 15, face = "bold"),
         axis.title.x = element_text(size = 20, face = "bold"),
@@ -138,14 +137,14 @@ dev.off()
 
 #4. Plots for prevalence - stratified by both age and sex
 SubtypesPrevalenceStratifiedByAgeAndSex<- prevSubtypes %>%
-  dplyr::filter(!denominator_age_group %in% c("18 to 30", "31 to 40", "18 to 150")) %>% 
+  dplyr::filter(!denominator_age_group %in% c("18 to 30", "18 to 150")) %>% 
   filter(denominator_sex!="Both") %>% 
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "DIP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "VP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "PD")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "Parkinsonism", "Parkinsonism")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81 to 150", "Over 80")) %>%
-  mutate(across(denominator_age_group, factor, levels=c("41 to 50", "51 to 60", "61 to 70", "71 to 80", "Over 80"))) %>%
+  mutate(across(denominator_age_group, factor, levels=c("31 to 40", "41 to 50", "51 to 60", "61 to 70", "71 to 80", "Over 80"))) %>%
   ggplot(aes(x = prevalence_start_date, y=prevalence, group = outcome_cohort_name, color = outcome_cohort_name)) +
   geom_ribbon(aes(ymin = prevalence_95CI_lower, ymax = prevalence_95CI_upper), alpha = .5, color = NA, show.legend = F) +
   geom_point(aes(colour = factor(outcome_cohort_name)), size = 3) +
@@ -155,7 +154,7 @@ SubtypesPrevalenceStratifiedByAgeAndSex<- prevSubtypes %>%
   ) +
   facet_grid(~denominator_sex ~denominator_age_group) +
   labs(colour = "Parkinsonism and subtypes") +
-  scale_color_manual(values = c("black", "red", "blue", "#8839A2"))+
+  scale_color_manual(values = c("black", "blue", "red", "#8839A2"))+
   theme(axis.text.x = element_text(angle = 45, hjust=1, size = 15, face = "bold"),
         axis.text.y = element_text(size = 15, face = "bold"),
         axis.title.x = element_text(size = 20, face = "bold"),
@@ -171,7 +170,7 @@ SubtypesPrevalenceStratifiedByAgeAndSex<- prevSubtypes %>%
   xlab("Time") + ylab("Prevalence")
 
 SubtypesPrevalenceAgeSexName <- paste0("SubtypesPrevalenceStratifiedByAgeAndSex", ".png")
-png(here("Results", db.name, "Plots", SubtypesPrevalenceAgeSexName), width = 18, height = 10, units = "in", res = 1500)
+png(here("Results", db.name, "Plots", SubtypesPrevalenceAgeSexName), width = 20, height = 12, units = "in", res = 1500)
 print(SubtypesPrevalenceStratifiedByAgeAndSex, newpage = FALSE)
 dev.off()
 
@@ -189,156 +188,135 @@ incSubtypes <- estimateIncidence(
 # 1.Plots for incidence of parkinsonism in the overall population
 SubtypesIncidenceOverall<- incSubtypes %>%
   filter(denominator_age_group == '18 to 150', denominator_sex == "Both") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "DIP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "VP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "PD")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "Parkinsonism", "Parkinsonism")) %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
-  geom_errorbar(width=0)+
-  geom_point() +
+  scale_color_manual(values = c("DIP" = "black", "PD" = "red", "Parkinsonism" = "blue", "VP" = "#8839A2"))+
+  geom_point(aes(colour = outcome_cohort_name), size = 6) +
+  geom_errorbar(width=100)+
   scale_y_continuous(labels = label_comma()) +
-  ggtitle("Incidence of parkinsonism in the overall population") + 
-  labs(colour = "Parkinsonism and its subtypes") +
-  theme(axis.text.x = element_text(angle = 45, hjust=1), 
+  labs(colour = "Parkinsonism and subtypes") +
+  theme(axis.text.x = element_text(angle = 45, hjust=1, size = 15, face = "bold"),
+        axis.text.y = element_text(size = 15, face = "bold"),
+        axis.title.x = element_text(size = 20, face = "bold"),
+        axis.title.y = element_text(size = 20, face="bold"),
         panel.background = element_blank() ,
-        axis.line = element_line(colour = "black", size = 0.6) ,
+        axis.line = element_line(colour = "black", size = 1) ,
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent", colour = "transparent")) +
-  theme(plot.title = element_text(hjust = 0.5)) +
+        legend.key = element_rect(fill = "transparent", colour = "transparent"),
+        legend.text=element_text(size=15, face = "bold"),
+        legend.title = element_text(size=20, face = "bold"),
+        plot.title = element_text(hjust = 1)) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
-SubtypesIncidenceOverallName <- paste0("SubtypesIncidenceOverallPopulation", ".pdf")
-
-pdf(here("Results", db.name, "Plots", SubtypesIncidenceOverallName),
-    width = 10, height = 8)
+SubtypesIncidenceOverallName <- paste0("SubtypesIncidenceOverallPopulation", ".png")
+png(here("Results", db.name, "Plots", SubtypesIncidenceOverallName), width = 18, height = 10, units = "in", res = 1500)
 print(SubtypesIncidenceOverall, newpage = FALSE)
 dev.off()
 
-#2. Plots for incidence of overall population of different age groups
-SubtypesIncidenceBoth<- incSubtypes %>%
+#2. Plots for prevalence - stratified by sex
+SubtypesIncidenceSex<- incSubtypes %>%
+  filter(denominator_age_group == '18 to 150' & (denominator_sex != "Both")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "DIP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "VP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "PDisease")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "Parkinsonism", "Parkinsonism")) %>%
+  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18 to 150", "Over 18")) %>%
+  ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
+  scale_color_manual(values = c("black", "blue", "red", "#8839A2"))+
+  geom_point(aes(colour = outcome_cohort_name), size = 6) +
+  geom_errorbar(width=100)+
+  scale_y_continuous(labels = label_comma()) +
+  facet_wrap(~denominator_sex) +
+  labs(colour = "Parkinsonism and subtypes") +
+  theme(axis.text.x = element_text(angle = 45, hjust=1, size = 15, face = "bold"),
+        axis.text.y = element_text(size = 15, face = "bold"),
+        axis.title.x = element_text(size = 20, face = "bold"),
+        axis.title.y = element_text(size = 20, face="bold"),
+        panel.background = element_blank() ,
+        axis.line = element_line(colour = "black", size = 1) ,
+        panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent", colour = "transparent"),
+        legend.text=element_text(size=15, face = "bold"),
+        legend.title = element_text(size=20, face = "bold"),
+        strip.text.x = element_text(size = 15, face = "bold")) +
+  xlab("Time") + ylab("Incidence (per 100,000 person-years)")
+
+SubtypesIncidenceSexName <- paste0("SubtypesIncidenceStratifiedBySex", ".png")
+png(here("Results", db.name, "Plots", SubtypesIncidenceSexName), width = 15, height = 8, units = "in", res = 1500)
+print(SubtypesIncidenceSex, newpage = FALSE)
+dev.off()
+
+#3. Plots for incidence stratfied by age
+SubtypesIncidenceAge<- incSubtypes %>%
   filter(denominator_sex == "Both") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
+  filter(!(denominator_age_group %in% c("18 to 150", "18 to 30"))) %>% 
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "DIP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "VP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "PD")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "Parkinsonism", "Parkinsonism")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18 to 150", "Over 18")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81 to 150", "Over 80")) %>%
-  mutate(across(denominator_age_group, factor, levels=c("Over 18","18 to 30","31 to 40", "41 to 50", "51 to 60", "61 to 70", "71 to 80", "Over 80"))) %>%
+  mutate(across(denominator_age_group, factor, levels=c("31 to 40", "41 to 50", "51 to 60", "61 to 70", "71 to 80", "Over 80"))) %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
-  geom_errorbar(width=0)+
-  geom_point() +
+  geom_errorbar(width=100)+
+  scale_color_manual(values = c("black", "blue", "red", "#8839A2"))+
+  geom_point(aes(colour = outcome_cohort_name), size = 3) +
   scale_y_continuous(labels = label_comma()) +
   facet_wrap(~denominator_age_group) +
-  ggtitle("Incidence of parkinsonism in the overall population, stratified by age") + 
-  labs(colour = "Parkinsonism and its subtypes") +
-  theme(axis.text.x = element_text(angle = 45, hjust=1), 
+  labs(colour = "Parkinsonism and subtypes") +
+  theme(axis.text.x = element_text(angle = 45, hjust=1, size = 15, face = "bold"),
+        axis.text.y = element_text(size = 15, face = "bold"),
+        axis.title.x = element_text(size = 20, face = "bold"),
+        axis.title.y = element_text(size = 20, face="bold"),
         panel.background = element_blank() ,
-        axis.line = element_line(colour = "black", size = 0.6) ,
+        axis.line = element_line(colour = "black", size = 1) ,
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent", colour = "transparent")) +
-  theme(plot.title = element_text(hjust = 0.5)) +
+        legend.key = element_rect(fill = "transparent", colour = "transparent"),
+        legend.text=element_text(size=15, face = "bold"),
+        legend.title = element_text(size=20, face = "bold"),
+        strip.text.x = element_text(size = 15, face = "bold")) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
-SubtypesIncidenceBothName <- paste0("SubtypesIncidenceBoth", ".pdf")
-
-pdf(here("Results", db.name, "Plots", SubtypesIncidenceBothName),
-    width = 10, height = 8)
-print(SubtypesIncidenceBoth, newpage = FALSE)
+SubtypesIncidenceAgeName <- paste0("SubtypesIncidenceStratifiedByAge", ".png")
+png(here("Results", db.name, "Plots", SubtypesIncidenceAgeName), width = 18, height = 10, units = "in", res = 1500)
+print(SubtypesIncidenceAge, newpage = FALSE)
 dev.off()
 
-#3. Plots for incidence of men of different age groups
-SubtypesIncidenceMale<- incSubtypes %>%
-  filter(denominator_sex == "Male") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
+#4. Incidence stratified by age and sex
+SubtypesIncidenceStratifiedByAgeAndSex<- incSubtypes %>%  
+  dplyr::filter(!denominator_age_group %in% c("18 to 30", "18 to 150")) %>% 
+  filter(denominator_sex!="Both") %>% 
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "DIP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "VP")) %>%
+  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "PD")) %>%
   mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "Parkinsonism", "Parkinsonism")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18 to 150", "Over 18")) %>%
   mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81 to 150", "Over 80")) %>%
-  mutate(across(denominator_age_group, factor, levels=c("Over 18","18 to 30","31 to 40", "41 to 50", "51 to 60", "61 to 70", "71 to 80", "Over 80"))) %>%
+  mutate(across(denominator_age_group, factor, levels=c("31 to 40", "41 to 50", "51 to 60", "61 to 70", "71 to 80", "Over 80"))) %>%
   ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
-  geom_errorbar(width=0)+
-  geom_point() +
-  scale_y_continuous(labels = label_comma()) +
-  facet_wrap(~denominator_age_group) +
-  ggtitle("Incidence of parkinsonism in men, stratified by age") + 
-  labs(colour = "Parkinsonism and its subtypes") +
-  theme(axis.text.x = element_text(angle = 45, hjust=1), 
-        panel.background = element_blank() ,
-        axis.line = element_line(colour = "black", size = 0.6) ,
-        panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent", colour = "transparent")) +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  xlab("Time") + ylab("Incidence (per 100,000 person-years)")
-
-SubtypesIncidenceMaleName <- paste0("SubtypesIncidenceMale", ".pdf")
-
-pdf(here("Results", db.name, "Plots", SubtypesIncidenceMaleName),
-    width = 10, height = 8)
-print(SubtypesIncidenceMale, newpage = FALSE)
-dev.off()
-
-#4. Plots for incidence of women of different age groups
-SubtypesIncidenceFemale<- incSubtypes %>%
-  filter(denominator_sex == "Female") %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "Parkinsonism", "Parkinsonism")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18 to 150", "Over 18")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81 to 150", "Over 80")) %>%
-  mutate(across(denominator_age_group, factor, levels=c("Over 18","18 to 30","31 to 40", "41 to 50", "51 to 60", "61 to 70", "71 to 80", "Over 80"))) %>%
-  ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
-  geom_errorbar(width=0)+
-  geom_point() +
-  scale_y_continuous(labels = label_comma()) +
-  facet_wrap(~denominator_age_group) +
-  ggtitle("Incidence of parkinsonism in women, stratified by age") + 
-  labs(colour = "Parkinsonism and its subtypes") +
-  theme(axis.text.x = element_text(angle = 45, hjust=1), 
-        panel.background = element_blank() ,
-        axis.line = element_line(colour = "black", size = 0.6) ,
-        panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent", colour = "transparent")) +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  xlab("Time") + ylab("Incidence (per 100,000 person-years)")
-
-SubtypesIncidenceFemaleName <- paste0("SubtypesIncidenceFemale", ".pdf")
-
-pdf(here("Results", db.name, "Plots", SubtypesIncidenceFemaleName),
-    width = 10, height = 8)
-print(SubtypesIncidenceFemale, newpage = FALSE)
-dev.off()
-
-#5. Plots for incidence overall
-SubtypesIncidenceStratifiedByAgeAndSex<- incSubtypes %>%
-  dplyr::filter(!denominator_age_group %in% c("18 to 30", "31 to 40")) %>% 
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "Drug Induced Parkinsonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "VascularParkinsonism", "Vascular Parkisonism")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "ParkinsonsDisease", "Parkinson's Disease")) %>%
-  mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "Parkinsonism", "Parkinsonism")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "18 to 150", "Over 18")) %>%
-  mutate(denominator_age_group = replace(denominator_age_group, denominator_age_group == "81 to 150", "Over 80")) %>%
-  mutate(across(denominator_age_group, factor, levels=c("Over 18", "41 to 50", "51 to 60", "61 to 70", "71 to 80", "Over 80"))) %>%
-  ggplot(aes(x = incidence_start_date, y=incidence_100000_pys, ymin = incidence_100000_pys_95CI_lower, ymax = incidence_100000_pys_95CI_upper, group = outcome_cohort_name, color = outcome_cohort_name)) +
-  geom_errorbar(width=0)+
-  geom_point() +
+  geom_errorbar(width=100)+
+  scale_color_manual(values = c("black", "blue", "red", "#8839A2"))+
+  geom_point(aes(colour = outcome_cohort_name), size = 3) +
   facet_grid(~denominator_sex ~denominator_age_group) +
-  ggtitle("Incidence of parkinsonism, stratified by both age and sex") + 
-  labs(colour = "Parkinsonism and its subtypes") +
-  theme(axis.text.x = element_text(angle = 45, hjust=1), 
-        panel.background = element_blank() ,
-        axis.line = element_line(colour = "black", size = 0.6) ,
-        panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent", colour = "transparent")) +
-  theme(plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(labels = label_comma()) +
+  labs(colour = "Parkinsonism and its subtypes") +
+  theme(axis.text.x = element_text(angle = 45, hjust=1, size = 15, face = "bold"),
+        axis.text.y = element_text(size = 15, face = "bold"),
+        axis.title.x = element_text(size = 20, face = "bold"),
+        axis.title.y = element_text(size = 20, face="bold"),
+        panel.background = element_blank() ,
+        axis.line = element_line(colour = "black", size = 1) ,
+        panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent", colour = "transparent"),
+        legend.text=element_text(size=15, face = "bold"),
+        legend.title = element_text(size=20, face = "bold"),
+        strip.text.x = element_text(size = 15, face = "bold"),
+        strip.text.y = element_text(size = 15, face = "bold")) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
-SubtypesIncidenceStratifiedByAgeAndSexName <- paste0("SubtypesIncidenceStratifiedByAgeAndSex", ".pdf")
-
-pdf(here("Results", db.name, "Plots", SubtypesIncidenceStratifiedByAgeAndSexName),
-    width = 20, height = 8)
+SubtypesIncidenceAgeSexName <- paste0("SubtypesIncidenceStratifiedByAgeAndSex", ".png")
+png(here("Results", db.name, "Plots", SubtypesIncidenceAgeSexName), width = 20, height = 12, units = "in", res = 1500)
 print(SubtypesIncidenceStratifiedByAgeAndSex, newpage = FALSE)
 dev.off()
 
