@@ -84,3 +84,4 @@ cdm$person %>%
 source(here("RunStudy.R"))
 # after the study is run you should have zip folders in your output folder (Results) to share
 
+dbDisconnect(db)
