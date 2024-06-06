@@ -1,6 +1,14 @@
 Incidence and Prevalence of Parkinsonism and its drug use
 ========================================================================================================================================================
 
+# Incidence and Prevalence of Parkinsonism and its drug use
+<img src="https://img.shields.io/badge/Study%20Status-Started-blue.svg" alt="Study Status: Started">
+
+- **Study title**: Incidence and Prevalence of Parkinsonism and its drug use
+- **Study lead(s)**: Xihang Chen (xihang.chen@ndorms.ox.ac.uk)
+- **ShinyApp Main Study**: TBC
+- **Publications**: TBC
+  
 ## Introduction
 This study focuses on the incidence and prevalence of parkinsonism and its subtypes (namely Parkinson's Disease, vascular parkinsonism and drug-induced parkinsonism) as well as the incidence and prevalence of the use of popular antiparkinson drugs (namely levodopa, dopamine agonists, MAO-B inhibitors, COMT inhibitors and amantadine). More specifically, this study will be completed via these three onjectives:
 1) Calculate the annual incidence and period prevalence of parkinsonism and its subtypes from 2007 to now.
