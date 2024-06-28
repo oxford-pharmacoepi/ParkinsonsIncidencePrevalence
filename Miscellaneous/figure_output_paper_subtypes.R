@@ -301,7 +301,7 @@ prevSubtypes %>%
   ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceByAge), width = 18, height = 10, dpi = 600)
 }
 
-for (subtype in c("DrugInducedParkinsonism", "VascularParkinsonism", "ParkinsonsDisease", "Parkinsonism")){
+for (subtype in c("DrugInducedParkinsonism", "VascularParkinsonism")){
   prevSubtypes %>%
     filter(!(denominator_age_group %in% c("18 to 150", "18 to 30", "31 to 40", "41 to 50", "51 to 60")) & (denominator_sex == "Both") & outcome_cohort_name == subtype) %>%
     mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "DIP")) %>%
@@ -336,7 +336,7 @@ for (subtype in c("DrugInducedParkinsonism", "VascularParkinsonism", "Parkinsons
 }
 
 #4. prevalence by age and sex
-for (subtype in c("DrugInducedParkinsonism", "VascularParkinsonism", "ParkinsonsDisease", "Parkinsonism")){
+for (subtype in c("ParkinsonsDisease", "Parkinsonism")){
   prevSubtypes %>%
     filter(!(denominator_age_group %in% c("18 to 150", "18 to 30", "31 to 40")) & (denominator_sex != "Both") & outcome_cohort_name == subtype) %>%
     mutate(outcome_cohort_name = replace(outcome_cohort_name, outcome_cohort_name == "DrugInducedParkinsonism", "DIP")) %>%
