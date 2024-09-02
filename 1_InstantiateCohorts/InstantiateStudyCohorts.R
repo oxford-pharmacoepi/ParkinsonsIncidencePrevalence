@@ -50,7 +50,8 @@ subtypesCohortSet<-cohortSet(cdm[["parkinson_subtypes"]]) %>%
   mutate(cohort_name_camel = case_when(cohort_name == "Drug Induced Parkinsonism" ~ "DrugInducedParkinsonism",
                                        cohort_name == "Parkinsonism" ~ "Parkinsonism",
                                        cohort_name == "Parkinson's Disease" ~ "ParkinsonsDisease",
-                                       cohort_name == "Vascular Parkinsonism" ~ "VascularParkinsonism"))
+                                       cohort_name == "Vascular Parkinsonism" ~ "VascularParkinsonism")) %>% 
+  dplyr::compute()
 
 subtypesCohortSet_1y<-cohortSet(cdm[["parkinson_subtypes_1y"]]) %>% 
   mutate(cohort_name = case_when(cohort_name == "DrugInducedParkinsonism" ~ "Drug Induced Parkinsonism",
@@ -60,4 +61,5 @@ subtypesCohortSet_1y<-cohortSet(cdm[["parkinson_subtypes_1y"]]) %>%
   mutate(cohort_name_camel = case_when(cohort_name == "Drug Induced Parkinsonism" ~ "DrugInducedParkinsonism",
                                        cohort_name == "Parkinsonism" ~ "Parkinsonism",
                                        cohort_name == "Parkinson's Disease" ~ "ParkinsonsDisease",
-                                       cohort_name == "Vascular Parkinsonism" ~ "VascularParkinsonism"))
+                                       cohort_name == "Vascular Parkinsonism" ~ "VascularParkinsonism")) %>% 
+  dplyr::compute()
