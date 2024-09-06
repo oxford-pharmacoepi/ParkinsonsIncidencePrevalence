@@ -8,14 +8,10 @@ cdm <- generateDenominatorCohortSet(
   cdm = cdm,
   name = "denominator_general_pop",
   cohortDateRange = as.Date(c("2007-01-01", "2021-12-31")),
-  ageGroup = list(c(18, 19), c(20, 24), 
-                  c(25, 29), c(30, 34),
-                  c(35, 39), c(40, 44),
-                  c(45, 49), c(50, 54),
-                  c(55, 59), c(60, 64),
-                  c(65, 69), c(70, 74),
-                  c(75, 79), c(80, 84),
-                  c(85, 89), c(91, 150)),
+  ageGroup = list(c(18, 29), c(30, 39), 
+                  c(40, 49), c(50, 59),
+                  c(60, 69), c(70, 79), 
+                  c(80, 89), c(91, 150)),
   sex = c("Female", "Male", "Both"),
   daysPriorHistory = 365
 )
@@ -26,11 +22,36 @@ prevSubtypes <- estimatePeriodPrevalence(cdm = cdm,
                                          outcomeTable = "parkinson_subtypes",
                                          minCellCount = 0)
 
-ESP13 <- readr::read_csv(here("2_Analysis", "AgeStandards", "ESP13.csv"), 
-                         show_col_types = FALSE) |>
-  dplyr::filter(!(age_group %in% c("0 to 17", "all ages"))) |>
-  dplyr::rename("pop" = "count",
-                "denominator_age_group" = "age_group")
+output.folder.data<-here("Results", db.name, "Data")
+
+if (!file.exists(output.folder.data)){
+  dir.create(output.folder.data, recursive = TRUE)}
+
+saveRDS(prevSubtypes,
+        paste0(output.folder.data, "/prevalence_unobscured.rds"))
+
+ESP2013 <- readr::read_csv(here("2_Analysis", "AgeStandards", "ESP13.csv"), 
+                         show_col_types = FALSE)
+
+ESP13 <- tibble(
+ "age_group"= c("18 to 29",
+                "30 to 39",
+                "40 to 49",
+                "50 to 59",
+                "60 to 69",
+                "70 to 79",
+                "80 to 89",
+                "90+"),
+"count" = c(ESP2013 |> dplyr::filter(age_group %in% c("18 to 19", "20 to 24", "25 to 29")) |> dplyr::pull("count") |> sum(),
+            ESP2013 |> dplyr::filter(age_group %in% c("30 to 34", "35 to 39")) |> dplyr::pull("count") |> sum(),
+            ESP2013 |> dplyr::filter(age_group %in% c("40 to 44", "45 to 49")) |> dplyr::pull("count") |> sum(),
+            ESP2013 |> dplyr::filter(age_group %in% c("50 to 54", "55 to 59")) |> dplyr::pull("count") |> sum(),
+            ESP2013 |> dplyr::filter(age_group %in% c("60 to 64", "65 to 69")) |> dplyr::pull("count") |> sum(),
+            ESP2013 |> dplyr::filter(age_group %in% c("70 to 74", "75 to 79")) |> dplyr::pull("count") |> sum(),
+            ESP2013 |> dplyr::filter(age_group %in% c("80 to 84", "85 to 89")) |> dplyr::pull("count") |> sum(),
+            ESP2013 |> dplyr::filter(age_group %in% c("90+")) |> dplyr::pull("count") |> sum())
+) |> dplyr::rename("pop" = "count",
+                   "denominator_age_group" = "age_group")
 
 prevSubtypesOverallStd <- prevSubtypes %>% 
   filter(denominator_sex == "Both",
@@ -193,6 +214,9 @@ incSubtypes <- estimateIncidence(cdm = cdm,
                                  denominatorTable = "denominator_general_pop",
                                  outcomeTable = "parkinson_subtypes",
                                  minCellCount = 0)
+
+saveRDS(incSubtypes,
+        paste0(output.folder.data, "/incidence_unobscured.rds"))
 
 incSubtypesOverallStd <- incSubtypes %>% 
   filter(denominator_sex == "Both",
