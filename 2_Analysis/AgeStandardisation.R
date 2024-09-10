@@ -503,5 +503,5 @@ std_prev %>%
         legend.title = element_text(size=20, face = "bold"))+
   xlab("Time") + ylab("Age Standardised Prevalence (per 100,000 person-years)")
 
-StdSubtypesPrevalenceBySexName <- paste0("StandardisedSubtypesPrevalenceBySex", subtype, ".png")
+StdSubtypesPrevalenceBySexName <- paste0("StandardisedSubtypesPrevalenceBySex", ".png")
 ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesPrevalenceBySexName), width = 18, height = 10, dpi = 600)
