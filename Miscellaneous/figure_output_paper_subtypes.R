@@ -31,8 +31,8 @@ incSubtypes %>%
         plot.title = element_text(hjust = 1)) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
-SubtypesIncidenceOverallName <- paste0("SubtypesIncidenceOverallPopulation", ".png")
-ggsave(file = here(ip_subtypes_paper_plots, SubtypesIncidenceOverallName), width = 18, height = 10, dpi = 600)
+SubtypesIncidenceOverallName <- paste0("SubtypesIncidenceOverallPopulation", ".tiff")
+ggsave(file = here(ip_subtypes_paper_plots, SubtypesIncidenceOverallName), width = 10, height = 6.5, device = "tiff", dpi = 300)
 
 #2. incidence by sex
 incSubtypes %>%
@@ -64,8 +64,8 @@ incSubtypes %>%
         plot.title = element_text(hjust = 1)) +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
-SubtypesIncidenceBySexName <- paste0("SubtypesIncidenceBySex", ".png")
-ggsave(file = here(ip_subtypes_paper_plots, SubtypesIncidenceBySexName), width = 18, height = 10, dpi = 600)
+SubtypesIncidenceBySexName <- paste0("SubtypesIncidenceBySex", ".tiff")
+ggsave(file = here(ip_subtypes_paper_plots, SubtypesIncidenceBySexName), width = 10, height = 6.5, device = "tiff", dpi = 300)
 
 #3. incidence by age
 for (subtype in c("ParkinsonsDisease", "Parkinsonism")){
@@ -94,8 +94,8 @@ incSubtypes %>%
         legend.position="none") +
   xlab("Time") + ylab("Incidence (per 100,000 person-years)")
 
-SubtypesIncidenceByAge <- paste0("SubtypesIncidenceAge", subtype, ".png")
-ggsave(file = here(ip_subtypes_paper_plots, SubtypesIncidenceByAge), width = 18, height = 10, dpi = 600)
+SubtypesIncidenceByAge <- paste0("SubtypesIncidenceAge", subtype, ".tiff")
+ggsave(file = here(ip_subtypes_paper_plots, SubtypesIncidenceByAge), width = 10, height = 6.5, units = "in", device = "tiff", dpi = 300)
 }
 
 for (subtype in c("DrugInducedParkinsonism", "VascularParkinsonism")){
@@ -124,8 +124,8 @@ for (subtype in c("DrugInducedParkinsonism", "VascularParkinsonism")){
           legend.position="none") +
     xlab("Time") + ylab("Incidence (per 100,000 person-years)")
   
-  SubtypesIncidenceByAge <- paste0("SubtypesIncidenceAge", subtype, ".png")
-  ggsave(file = here(ip_subtypes_paper_plots, SubtypesIncidenceByAge), width = 18, height = 10, dpi = 600)
+  SubtypesIncidenceByAge <- paste0("SubtypesIncidenceAge", subtype, ".tiff")
+  ggsave(file = here(ip_subtypes_paper_plots, SubtypesIncidenceByAge), width = 10, height = 6.5, device = "tiff", dpi = 300)
 }
 
 #4. incidence by age and sex
@@ -159,8 +159,8 @@ for (subtype in c("ParkinsonsDisease", "Parkinsonism")){
           legend.title = element_text(size=20, face = "bold")) +
     xlab("Time") + ylab("Incidence (per 100,000 person-years)")
   
-  SubtypesIncidenceByAgeSex <- paste0("SubtypesIncidenceAgeSex", subtype, ".png")
-  ggsave(file = here(ip_subtypes_paper_plots, SubtypesIncidenceByAgeSex), width = 18, height = 10, dpi = 600)
+  SubtypesIncidenceByAgeSex <- paste0("SubtypesIncidenceAgeSex", subtype, ".tiff")
+  ggsave(file = here(ip_subtypes_paper_plots, SubtypesIncidenceByAgeSex), width = 10, height = 6.5, device = "tiff", dpi = 300)
 }
 
 for (subtype in c("DrugInducedParkinsonism", "VascularParkinsonism")){
@@ -193,8 +193,8 @@ for (subtype in c("DrugInducedParkinsonism", "VascularParkinsonism")){
           legend.title = element_text(size=20, face = "bold")) +
     xlab("Time") + ylab("Incidence (per 100,000 person-years)")
   
-  SubtypesIncidenceByAgeSex <- paste0("SubtypesIncidenceAgeSex", subtype, ".png")
-  ggsave(file = here(ip_subtypes_paper_plots, SubtypesIncidenceByAgeSex), width = 18, height = 10, dpi = 600)
+  SubtypesIncidenceByAgeSex <- paste0("SubtypesIncidenceAgeSex", subtype, ".tiff")
+  ggsave(file = here(ip_subtypes_paper_plots, SubtypesIncidenceByAgeSex), width = 10, height = 6.5, device = "tiff", dpi = 300)
 }
 
 #### prev
@@ -227,8 +227,8 @@ prevSubtypes %>%
         plot.title = element_text(hjust = 1)) +
   xlab("Time") + ylab("Prevalence")
 
-SubtypesPrevalenceOverallName <- paste0("SubtypesPrevalenceOverallPopulation", ".png")
-ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceOverallName), width = 18, height = 10, dpi = 600)
+SubtypesPrevalenceOverallName <- paste0("SubtypesPrevalenceOverallPopulation", ".tiff")
+ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceOverallName), width = 10, height = 6.5, device = "tiff", dpi = 300)
 
 #2. prevalence by sex
 prevSubtypes %>%
@@ -263,8 +263,8 @@ prevSubtypes %>%
         plot.title = element_text(hjust = 1)) +
   xlab("Time") + ylab("Prevalence")
 
-SubtypesPrevalenceBySexName <- paste0("SubtypesPrevalenceBySex", ".png")
-ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceBySexName), width = 18, height = 10, dpi = 600)
+SubtypesPrevalenceBySexName <- paste0("SubtypesPrevalenceBySex", ".tiff")
+ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceBySexName), width = 10, height = 6.5, device = "tiff",dpi = 300)
 
 #3. prevalence by age
 for (subtype in c("ParkinsonsDisease", "Parkinsonism")){
@@ -297,8 +297,8 @@ prevSubtypes %>%
           legend.position="none") +
   xlab("Time") + ylab("Prevalence")
   
-  SubtypesPrevalenceByAge <- paste0("SubtypesPrevalenceAge", subtype, ".png")
-  ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceByAge), width = 18, height = 10, dpi = 600)
+  SubtypesPrevalenceByAge <- paste0("SubtypesPrevalenceAge", subtype, ".tiff")
+  ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceByAge), width = 10, height = 6.5, device = "tiff", dpi = 300)
 }
 
 for (subtype in c("DrugInducedParkinsonism", "VascularParkinsonism")){
@@ -331,8 +331,8 @@ for (subtype in c("DrugInducedParkinsonism", "VascularParkinsonism")){
           legend.position="none") +
     xlab("Time") + ylab("Prevalence")
   
-  SubtypesPrevalenceByAge <- paste0("SubtypesPrevalenceAge", subtype, ".png")
-  ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceByAge), width = 18, height = 10, dpi = 600)
+  SubtypesPrevalenceByAge <- paste0("SubtypesPrevalenceAge", subtype, ".tiff")
+  ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceByAge), width = 10, height = 6.5, device = "tiff", dpi = 300)
 }
 
 #4. prevalence by age and sex
@@ -370,8 +370,8 @@ for (subtype in c("ParkinsonsDisease", "Parkinsonism")){
           legend.title = element_text(size=20, face = "bold")) +
     xlab("Time") + ylab("Prevalence")
   
-  SubtypesPrevalenceByAgeSex <- paste0("SubtypesPrevalenceAgeSex", subtype, ".png")
-  ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceByAgeSex), width = 18, height = 10, dpi = 600)
+  SubtypesPrevalenceByAgeSex <- paste0("SubtypesPrevalenceAgeSex", subtype, ".tiff")
+  ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceByAgeSex), width = 10, height = 6.5, device = "tiff", dpi = 300)
 }
 
 for (subtype in c("DrugInducedParkinsonism", "VascularParkinsonism")){
@@ -408,6 +408,6 @@ for (subtype in c("DrugInducedParkinsonism", "VascularParkinsonism")){
           legend.title = element_text(size=20, face = "bold")) +
     xlab("Time") + ylab("Prevalence")
   
-  SubtypesPrevalenceByAgeSex <- paste0("SubtypesPrevalenceAgeSex", subtype, ".png")
-  ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceByAgeSex), width = 18, height = 10, dpi = 600)
+  SubtypesPrevalenceByAgeSex <- paste0("SubtypesPrevalenceAgeSex", subtype, ".tiff")
+  ggsave(file = here(ip_subtypes_paper_plots, SubtypesPrevalenceByAgeSex), width = 10, height = 6.5, device = "tiff", dpi = 300)
 }
