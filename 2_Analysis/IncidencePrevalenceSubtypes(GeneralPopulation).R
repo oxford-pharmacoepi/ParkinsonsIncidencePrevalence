@@ -329,3 +329,9 @@ info(logger, 'GATHERING RESULTS FOR SUBTYPES FOR THE GENERAL POPULATION')
 exportIncidencePrevalenceResults(resultList = list("Prevalence of Subtypes" = prevSubtypes, "Incidence of Subtypes" = incSubtypes),
                                  zipName= paste0(db.name, "_IncidencePrevalenceResultsSubtypes"), 
                                  outputFolder=here::here("Results", db.name))
+
+saveRDS(incSubtypes,
+        paste0(output.folder.data, "/incidence_obscured.rds"))
+
+saveRDS(prevSubtypes,
+        paste0(output.folder.data, "/prevalence_obscured.rds"))

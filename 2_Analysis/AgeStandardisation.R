@@ -393,19 +393,19 @@ std_inc %>%
   facet_wrap(~outcome_cohort_name, scales = "free") +
   theme(axis.text.x = element_text(angle = 45, hjust=1, size = 15, face = "bold"),
         axis.text.y = element_text(size = 15, face = "bold"),
-        axis.title.x = element_text(size = 20, face = "bold"),
-        axis.title.y = element_text(size = 20, face="bold"),
+        axis.title.x = element_text(size = 15, face = "bold"),
+        axis.title.y = element_text(size = 15, face="bold"),
         panel.background = element_blank() ,
         axis.line = element_line(colour = "black", size = 1) ,
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
-        strip.text.x = element_text(size = 20, face = "bold"),
-        strip.text.y = element_text(size = 20, face = "bold"),
+        strip.text.x = element_text(size = 15, face = "bold"),
+        strip.text.y = element_text(size = 15, face = "bold"),
         legend.position="none",
         plot.title = element_text(hjust = 1)) +
   xlab("Time") + ylab("Age Standardised Incidence (per 100,000 person-years)")
 
-StdSubtypesIncidenceOverallName <- paste0("StandardisedSubtypesIncidenceOverallPopulation", ".png")
-ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesIncidenceOverallName), width = 18, height = 10, dpi = 600)
+StdSubtypesIncidenceOverallName <- paste0("StandardisedSubtypesIncidenceOverallPopulation", ".tiff")
+ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesIncidenceOverallName), width = 10, height = 6.5, device = "tiff", dpi = 300)
 
 std_inc %>%
   filter(!(denominator_sex == "Both")) %>%
@@ -424,20 +424,20 @@ std_inc %>%
   scale_y_continuous(labels = label_comma()) +
   theme(axis.text.x = element_text(angle = 45, hjust=1, size = 15, face = "bold"),
         axis.text.y = element_text(size = 15, face = "bold"),
-        axis.title.x = element_text(size = 20, face = "bold"),
-        axis.title.y = element_text(size = 20, face="bold"),
+        axis.title.x = element_text(size = 15, face = "bold"),
+        axis.title.y = element_text(size = 15, face="bold"),
         panel.background = element_blank() ,
         axis.line = element_line(colour = "black", size = 1) ,
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
-        strip.text.x = element_text(size = 20, face = "bold"),
-        strip.text.y = element_text(size = 20, face = "bold"),
+        strip.text.x = element_text(size = 15, face = "bold"),
+        strip.text.y = element_text(size = 15, face = "bold"),
         plot.title = element_text(hjust = 1),
         legend.key = element_rect(fill = "transparent", colour = "transparent"),
-        legend.text=element_text(size=20, face = "bold"),
-        legend.title = element_text(size=20, face = "bold"))+
+        legend.text=element_text(size=15, face = "bold"),
+        legend.title = element_text(size=15, face = "bold"))+
   xlab("Time") + ylab("Age Standardised Incidence (per 100,000 person-years)")
-StdSubtypesIncidenceBySexName <- paste0("StandardisedSubtypesIncidenceBySex", ".png")
-ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesIncidenceBySexName), width = 18, height = 10, dpi = 600)
+StdSubtypesIncidenceBySexName <- paste0("StandardisedSubtypesIncidenceBySex", ".tiff")
+ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesIncidenceBySexName), width = 10, height = 6.5, device = "tiff", dpi = 300)
 
 std_prev %>%
   filter(denominator_age_group == '18 to 150', denominator_sex == "Both") %>%
@@ -456,19 +456,19 @@ std_prev %>%
   facet_wrap(~outcome_cohort_name, scales = "free") +
   theme(axis.text.x = element_text(angle = 45, hjust=1, size = 15, face = "bold"),
         axis.text.y = element_text(size = 15, face = "bold"),
-        axis.title.x = element_text(size = 20, face = "bold"),
-        axis.title.y = element_text(size = 20, face="bold"),
+        axis.title.x = element_text(size = 15, face = "bold"),
+        axis.title.y = element_text(size = 15, face="bold"),
         panel.background = element_blank() ,
         axis.line = element_line(colour = "black", size = 1) ,
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
-        strip.text.x = element_text(size = 20, face = "bold"),
-        strip.text.y = element_text(size = 20, face = "bold"),
+        strip.text.x = element_text(size = 15, face = "bold"),
+        strip.text.y = element_text(size = 15, face = "bold"),
         legend.position="none",
         plot.title = element_text(hjust = 1)) +
   xlab("Time") + ylab("Age Standardised Prevalence (per 100,000 person-years)")
 
-StdSubtypesPrevalenceOverallName <- paste0("StandardisedSubtypesPrevalenceOverallPopulation", ".png")
-ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesPrevalenceOverallName), width = 18, height = 10, dpi = 600)
+StdSubtypesPrevalenceOverallName <- paste0("StandardisedSubtypesPrevalenceOverallPopulation", ".tiff")
+ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesPrevalenceOverallName), width = 10, height = 6.5, device = "tiff", dpi = 300)
 
 std_prev %>%
   filter(!(denominator_sex == "Both")) %>%
@@ -490,18 +490,18 @@ std_prev %>%
   labs(colour = "Sex") +
   theme(axis.text.x = element_text(angle = 45, hjust=1, size = 15, face = "bold"),
         axis.text.y = element_text(size = 15, face = "bold"),
-        axis.title.x = element_text(size = 20, face = "bold"),
-        axis.title.y = element_text(size = 20, face="bold"),
+        axis.title.x = element_text(size = 15, face = "bold"),
+        axis.title.y = element_text(size = 15, face="bold"),
         panel.background = element_blank() ,
         axis.line = element_line(colour = "black", size = 1) ,
         panel.grid.major = element_line(color = "grey", size = 0.2, linetype = "dashed"),
-        strip.text.x = element_text(size = 20, face = "bold"),
-        strip.text.y = element_text(size = 20, face = "bold"),
+        strip.text.x = element_text(size = 15, face = "bold"),
+        strip.text.y = element_text(size = 15, face = "bold"),
         plot.title = element_text(hjust = 1),
         legend.key = element_rect(fill = "transparent", colour = "transparent"),
-        legend.text=element_text(size=20, face = "bold"),
-        legend.title = element_text(size=20, face = "bold"))+
+        legend.text=element_text(size=15, face = "bold"),
+        legend.title = element_text(size=15, face = "bold"))+
   xlab("Time") + ylab("Age Standardised Prevalence (per 100,000 person-years)")
 
-StdSubtypesPrevalenceBySexName <- paste0("StandardisedSubtypesPrevalenceBySex", ".png")
-ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesPrevalenceBySexName), width = 18, height = 10, dpi = 600)
+StdSubtypesPrevalenceBySexName <- paste0("StandardisedSubtypesPrevalenceBySex", ".tiff")
+ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesPrevalenceBySexName), width = 10, height = 6.5, device = "tiff", dpi = 300)
