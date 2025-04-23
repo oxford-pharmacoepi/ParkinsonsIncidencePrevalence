@@ -402,10 +402,10 @@ std_inc %>%
         strip.text.y = element_text(size = 15, face = "bold"),
         legend.position="none",
         plot.title = element_text(hjust = 1)) +
-  xlab("Time") + ylab("Age Standardised Incidence (per 100,000 person-years)")
+  xlab("Time") + ylab("Age Standardised Incidence (per 100,000 pys)")
 
 StdSubtypesIncidenceOverallName <- paste0("StandardisedSubtypesIncidenceOverallPopulation", ".tiff")
-ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesIncidenceOverallName), width = 10, height = 6.5, device = "tiff", dpi = 300)
+ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesIncidenceOverallName), width = 15, height = 5, device = "tiff", dpi = 300)
 
 std_inc %>%
   filter(!(denominator_sex == "Both")) %>%
@@ -435,9 +435,9 @@ std_inc %>%
         legend.key = element_rect(fill = "transparent", colour = "transparent"),
         legend.text=element_text(size=15, face = "bold"),
         legend.title = element_text(size=15, face = "bold"))+
-  xlab("Time") + ylab("Age Standardised Incidence (per 100,000 person-years)")
+  xlab("Time") + ylab("Age Standardised Incidence (per 100,000 pys)")
 StdSubtypesIncidenceBySexName <- paste0("StandardisedSubtypesIncidenceBySex", ".tiff")
-ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesIncidenceBySexName), width = 10, height = 6.5, device = "tiff", dpi = 300)
+ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesIncidenceBySexName), width = 15, height = 5, device = "tiff", dpi = 300)
 
 std_prev %>%
   filter(denominator_age_group == '18 to 150', denominator_sex == "Both") %>%
@@ -465,10 +465,10 @@ std_prev %>%
         strip.text.y = element_text(size = 15, face = "bold"),
         legend.position="none",
         plot.title = element_text(hjust = 1)) +
-  xlab("Time") + ylab("Age Standardised Prevalence (per 100,000 person-years)")
+  xlab("Time") + ylab("Age Standardised Prevalence (%)")
 
 StdSubtypesPrevalenceOverallName <- paste0("StandardisedSubtypesPrevalenceOverallPopulation", ".tiff")
-ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesPrevalenceOverallName), width = 10, height = 6.5, device = "tiff", dpi = 300)
+ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesPrevalenceOverallName), width = 15, height = 5, device = "tiff", dpi = 300)
 
 std_prev %>%
   filter(!(denominator_sex == "Both")) %>%
@@ -501,7 +501,7 @@ std_prev %>%
         legend.key = element_rect(fill = "transparent", colour = "transparent"),
         legend.text=element_text(size=15, face = "bold"),
         legend.title = element_text(size=15, face = "bold"))+
-  xlab("Time") + ylab("Age Standardised Prevalence (per 100,000 person-years)")
+  xlab("Time") + ylab("Age Standardised Prevalence (%)")
 
 StdSubtypesPrevalenceBySexName <- paste0("StandardisedSubtypesPrevalenceBySex", ".tiff")
-ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesPrevalenceBySexName), width = 10, height = 6.5, device = "tiff", dpi = 300)
+ggsave(file = here(ip_subtypes_paper_plots, StdSubtypesPrevalenceBySexName), width = 15, height = 5, device = "tiff", dpi = 300)
